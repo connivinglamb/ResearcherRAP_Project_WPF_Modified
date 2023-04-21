@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace ResearcherRAP_Project
 {
 
-    class Researcher
+    class ResearcherDetailed
     {
         public int researcherID;
         public string name;
@@ -25,7 +25,7 @@ namespace ResearcherRAP_Project
         public List<Publication> publicationsCache;
         public List<Publication> publicationsTemp;
     }
-    class ResearcherBrief
+    class ResearcherBrief //to implement, is the shortform class used for list indexing to save space as we dont need to cache all the records
     {
 
     }

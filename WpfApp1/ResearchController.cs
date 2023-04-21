@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ResearcherRAP_Project
 {
-    class ResearcherListController
+    public static class ResearcherListController
     {
         public int filterRange;
         public string filterName;
         public int researcherID;
 
-        public static List<Researcher> applyFilters(List<Researcher> temporaryList, int filterRange, string filterName)
+        public static List<ResearcherBrief> applyFilters(List<ResearcherBrief> temporaryList, int filterRange, string filterName)
         {
             return temporaryList;
         }
