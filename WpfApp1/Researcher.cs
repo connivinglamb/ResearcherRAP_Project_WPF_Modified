@@ -25,6 +25,10 @@ namespace ResearcherRAP_Project
         public List<Publication> publicationsCache;
         public List<Publication> publicationsTemp;
     }
+    class ResearcherBrief
+    {
+
+    }
     class PublicationDetails
     {
         public string doi;

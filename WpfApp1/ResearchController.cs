@@ -12,9 +12,9 @@ namespace ResearcherRAP_Project
         public string filterName;
         public int researcherID;
 
-        public static List<ResearcherList> applyFilters(List<ResearcherList> temporaryList, int FilterRange, string FilterName)
+        public static List<Researcher> applyFilters(List<Researcher> temporaryList, int filterRange, string filterName)
         {
-
+            return temporaryList;
         }
     }
     class ReportController
