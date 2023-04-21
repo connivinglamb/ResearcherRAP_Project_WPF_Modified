@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResearcherRAP_Project
 {
-    public static class ResearcherListController
+    class ResearcherListController
     {
         public int filterRange;
         public string filterName;
