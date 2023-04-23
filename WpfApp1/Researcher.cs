@@ -7,11 +7,11 @@ using static ResearcherRAP_Project.ResearcherDetailed;
 
 namespace ResearcherRAP_Project
 {
-    /*ResearcherLeven and type utilized both in ResearcherDetailed and ResearcherBrief Hence is put here*/
+    /*ResearcherLevel and type utilized both in ResearcherDetailed and ResearcherBrief Hence is put here*/
     public enum ResearcherLevel { A, B, C, D, E };
     public enum ResearcherType { Staff, Student };
 
-    class ResearcherDetailed
+    public class ResearcherDetailed
     {
         
         public enum CampusType { Hobart, Launceston, Cradle_Coast };
@@ -45,7 +45,7 @@ namespace ResearcherRAP_Project
         public List<PublicationBrief> publicationsCache;
         public List<PublicationBrief> publicationsTemp;
     }
-    class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
+    public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
     {
         public ResearcherType type;
         public ResearcherLevel level;
@@ -54,9 +54,15 @@ namespace ResearcherRAP_Project
         public string nameFamily;
         public string title;
     }
-    class PublicationDetailed
+    public class ResearcherDetailsBrief //used on interactiv history for staff researchers for positions held
     {
-        public enum PublicationType { Conference, Journal, Other};
+        public string staffResearcherPreviousPosition;
+        public DateTime staffResearcherPositionStart;
+        public DateTime staffResearcherPositionEnd;
+    }
+    public class PublicationDetailed
+    {
+        public enum PublicationType { Conference, Journal, Other };
 
         public PublicationType type;
 
@@ -69,12 +75,12 @@ namespace ResearcherRAP_Project
 
         public DateTime publicationYear;
         public DateTime availabilityDate;
-        
     }
-    class PublicationBrief //formerly cumulative
+    public class PublicationBrief //formerly cumulative
     {
         public string name;
         public string year;
     }
+
 }
 
