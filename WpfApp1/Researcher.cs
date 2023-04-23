@@ -35,8 +35,8 @@ namespace ResearcherRAP_Project
         public string? supervisor; //students only (Nullable)
         public float? threeYearAverage; //staff only (Nullable)
         public float? fundingReceived; //staff only (Nullable)
-        public float? performancebyPublication;
-        public float? performancebyFunding;
+        public float? performancebyPublication; //staff only (Nullable)
+        public float? performancebyFunding; //staff only (Nullable)
 
         public DateTime commencedWithInstitution;
         public DateTime commencedCurrentPosition;
@@ -44,6 +44,34 @@ namespace ResearcherRAP_Project
 
         public List<PublicationBrief> publicationsCache;
         public List<PublicationBrief> publicationsTemp;
+
+        public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, List<PublicationBrief> publicationsCache, List<PublicationBrief> publicationsTemp)
+        {
+            this.type = type;
+            this.campus = campus;
+            this.level = level;
+            this.researcherID = researcherID;
+            this.nameGiven = nameGiven;
+            this.nameFamily = nameFamily;
+            this.title = title;
+            this.schoolOrUnit = schoolOrUnit;
+            this.email = email;
+            this.photo = photo;
+            this.currentJobTitle = currentJobTitle;
+            this.publicationCount = publicationCount;
+            this.q1Percentage = q1Percentage;
+            this.degree = degree;
+            this.supervisor = supervisor;
+            this.threeYearAverage = threeYearAverage;
+            this.fundingReceived = fundingReceived;
+            this.performancebyPublication = performancebyPublication;
+            this.performancebyFunding = performancebyFunding;
+            this.commencedWithInstitution = commencedWithInstitution;
+            this.commencedCurrentPosition = commencedCurrentPosition;
+            this.tenure = tenure;
+            this.publicationsCache = publicationsCache;
+            this.publicationsTemp = publicationsTemp;
+        }
     }
     public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
     {
