@@ -42,8 +42,6 @@ namespace ResearcherRAP_Project
         public DateTime commencedCurrentPosition;
         public DateTime tenure;
 
-        public List<PublicationBrief> publicationsCache;
-        public List<PublicationBrief> publicationsTemp;
 
         public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, List<PublicationBrief> publicationsCache, List<PublicationBrief> publicationsTemp)
         {
@@ -69,8 +67,6 @@ namespace ResearcherRAP_Project
             this.commencedWithInstitution = commencedWithInstitution;
             this.commencedCurrentPosition = commencedCurrentPosition;
             this.tenure = tenure;
-            this.publicationsCache = publicationsCache;
-            this.publicationsTemp = publicationsTemp;
         }
     }
     public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
@@ -81,6 +77,7 @@ namespace ResearcherRAP_Project
         public string nameGiven;
         public string nameFamily;
         public string title;
+        public string researcherID;
     }
     public class ResearcherDetailsBrief //used on interactiv history for staff researchers for positions held
     {

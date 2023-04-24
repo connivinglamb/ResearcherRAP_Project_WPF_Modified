@@ -8,6 +8,15 @@ namespace ResearcherRAP_Project
 {
     class DBAdapter
     {
+        public static List<ResearcherDetailed> researcherDetailsQuery(int researcherID) {
+            List<ResearcherDetailed> newResearcherDetailedArray = new List<ResearcherDetailed>();
+            return newResearcherDetailedArray;
+        }
+        public static List<ResearcherDetailed> researcherDetailsQuery(int researcherID)
+        {
+            List<ResearcherDetailed> newResearcherDetailedArray = new List<ResearcherDetailed>();
+            return newResearcherDetailedArray;
+        }
         public static List<PublicationBrief> publicationQuery(int researcherID) { // modify int values to date objects later
             
 
@@ -16,6 +25,6 @@ namespace ResearcherRAP_Project
                 newPublicationArray.Add(new PublicationBrief { name = "computation heiarchy", year = "1998" });
             return newPublicationArray;
         }
-
+        
     }
 }

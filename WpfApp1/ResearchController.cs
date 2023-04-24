@@ -11,7 +11,7 @@ namespace ResearcherRAP_Project
     {
         public int filterRange;
         public string filterName;
-        public int researcherID;
+        public static int researcherID;
 
         public static List<ResearcherBrief> applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
