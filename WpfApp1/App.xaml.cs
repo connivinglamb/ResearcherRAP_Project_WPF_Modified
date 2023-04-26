@@ -11,15 +11,15 @@ namespace ResearcherRAP_Project
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class MainView : Application //please for the love of god this is where the program starts, do not forget!
+    public partial class ResearcherBriefView : Application //please for the love of god this is where the program starts, do not forget!
     {
         public void newClass1() //used for debugging purposes
         {
             Debug.WriteLine("test1");
         }
-        MainView()
+        ResearcherBriefView()
         {
-            newClass1();
+           
         }
     }
 }

@@ -12,8 +12,9 @@ namespace ResearcherRAP_Project
         public static int filterRange;
         public static string filterName;
         public static int? researcherID;
-        public static List<ResearcherDetailsBrief> researcherDetailsBriefCache;
-        public static List<ResearcherDetailsBrief> researcherDetailsBriefTemp;
+
+        public static List<ResearcherBrief> researcherDetailsBriefCache;
+        public static List<ResearcherBrief> researcherDetailsBriefTemp;
 
         public static List<ResearcherBrief> applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
@@ -26,6 +27,18 @@ namespace ResearcherRAP_Project
         {
             ListCache = DBAdapter.researcherBriefQuery();
             return ListCache;
+        }
+        public ResearcherBriefController()
+        {
+            filterRange = 0;
+            filterName = "";
+            researcherID = 0;
+            researcherDetailsBriefCache = populateCache(researcherDetailsBriefCache);
+            researcherDetailsBriefTemp = researcherDetailsBriefCache;
+        }
+        public static List<ResearcherBrief> loadResearchers()
+        {
+            return researcherDetailsBriefTemp;
         }
         public void showResearcherDetails()
         {

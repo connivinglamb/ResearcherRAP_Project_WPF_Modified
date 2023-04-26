@@ -6,7 +6,31 @@
         xmlns:local="clr-namespace:ResearcherRAP_Project"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="40*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        
+        <Button HorizontalContentAlignment="Stretch">Testbutton1</Button>
+        <Button Grid.Column="1">TestButton2</Button>
 
+        <ListBox Name="researcherList" Grid.Column="2" SelectedIndex="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding}" Grid.Column="1" /> //if i dont figure out how the fuck the binding does not work i am going to lose it
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

@@ -31,6 +31,12 @@ namespace ResearcherRAP_Project
             this.title = title;
             this.researcherID = researcherID;
         }
+
+        public string ToString()
+        {
+            string outputString = string.Format("{0} {1} ({2})", this.nameGiven, this.nameFamily, this.title);
+            return outputString;
+        }
     }
     public class ResearcherDetailed
     {

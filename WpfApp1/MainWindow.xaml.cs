@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,18 @@ namespace ResearcherRAP_Project
         public MainWindow()
         {
             InitializeComponent();
+            Debug.WriteLine("\ntest_initmainwindow\n");
+            ResearcherBriefController controller_brief = new ResearcherBriefController();
+            List<ResearcherBrief> testValues = ResearcherBriefController.loadResearchers();
+
+            /*foreach (ResearcherBrief x in testValues)
+            {
+                Debug.WriteLine(x.ToString());
+                researcherList.ItemsSource = x.nameGiven;
+            }*/
+
+            researcherList.ItemsSource = testValues;
+            Debug.WriteLine(testValues[0].nameGiven);
         }
     }
 }
