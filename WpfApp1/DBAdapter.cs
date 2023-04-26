@@ -8,9 +8,10 @@ namespace ResearcherRAP_Project
 {
     class DBAdapter
     {
-        public static List<ResearcherBrief> researcherBriefQuery(int researcherID)
+        public static List<ResearcherBrief> researcherBriefQuery()
         {
             List<ResearcherBrief> newResearcherBriefArray = new List<ResearcherBrief>();
+            newResearcherBriefArray.Add(new ResearcherBrief(ResearcherType.Staff, ResearcherLevel.A, "David", "Herbert","Dr",0));
             return newResearcherBriefArray;
         }
 
