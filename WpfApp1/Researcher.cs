@@ -11,6 +11,16 @@ namespace ResearcherRAP_Project
     public enum ResearcherLevel { A, B, C, D, E };
     public enum ResearcherType { Staff, Student };
 
+    public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
+    {
+        public ResearcherType type;
+        public ResearcherLevel level;
+
+        public string nameGiven;
+        public string nameFamily;
+        public string title;
+        public string researcherID;
+    }
     public class ResearcherDetailed
     {
         
@@ -42,6 +52,7 @@ namespace ResearcherRAP_Project
         public DateTime commencedCurrentPosition;
         public DateTime tenure;
 
+        
 
         public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, List<PublicationBrief> publicationsCache, List<PublicationBrief> publicationsTemp)
         {
@@ -69,21 +80,13 @@ namespace ResearcherRAP_Project
             this.tenure = tenure;
         }
     }
-    public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
-    {
-        public ResearcherType type;
-        public ResearcherLevel level;
-
-        public string nameGiven;
-        public string nameFamily;
-        public string title;
-        public string researcherID;
-    }
     public class ResearcherDetailsBrief //used on interactiv history for staff researchers for positions held
     {
         public string staffResearcherPreviousPosition;
         public DateTime staffResearcherPositionStart;
         public DateTime staffResearcherPositionEnd;
+
+        //implement tostring function here
     }
     public class PublicationDetailed
     {
@@ -101,10 +104,16 @@ namespace ResearcherRAP_Project
         public DateTime publicationYear;
         public DateTime availabilityDate;
     }
+    
     public class PublicationBrief //formerly cumulative
     {
         public string name;
         public string year;
+    }
+    public class ResearcherReport
+    {
+        public enum ReportGrade { poor, below_expectations, meeting_minimum, star_performer }
+        public string 
     }
 
 }
