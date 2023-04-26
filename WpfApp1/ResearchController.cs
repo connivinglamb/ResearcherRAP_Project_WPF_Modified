@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ResearcherRAP_Project
 {
-    public class ResearcherListController
+    public class ResearcherBriefController
     {
-        public int filterRange;
-        public string filterName;
-        public static int researcherID;
+        public static int filterRange;
+        public static string filterName;
+        public static int? researcherID;
         public static List<ResearcherDetailsBrief> researcherDetailsBriefCache;
         public static List<ResearcherDetailsBrief> researcherDetailsBriefTemp;
 
@@ -24,17 +24,17 @@ namespace ResearcherRAP_Project
         }
         public static List<ResearcherBrief> populateCache(List<ResearcherBrief> ListCache)
         {
-
+            ListCache = DBAdapter.researcherBriefQuery();
             return ListCache;
         }
-        public void showResearcherDetails(int researcherID)
+        public void showResearcherDetails()
         {
 
         }
 
     }
 
-public class ResearcherBriefController
+public class ResearcherDetailedController
     {
         private static int researcherID;
         public void userViewsPublications(int researcherID)

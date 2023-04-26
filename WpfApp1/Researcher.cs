@@ -20,7 +20,17 @@ namespace ResearcherRAP_Project
         public string nameGiven;
         public string nameFamily;
         public string title;
-        public string researcherID;
+        public int  researcherID;
+
+        public ResearcherBrief(ResearcherType type, ResearcherLevel level, string nameGiven, string nameFamily, string title, int researcherID)
+        {
+            this.type = type;
+            this.level = level;
+            this.nameGiven = nameGiven;
+            this.nameFamily = nameFamily;
+            this.title = title;
+            this.researcherID = researcherID;
+        }
     }
     public class ResearcherDetailed
     {

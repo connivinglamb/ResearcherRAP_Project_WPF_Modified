@@ -20,7 +20,7 @@ namespace ResearcherRAP_Project
             return newResearcherDetailedArray;
         }
 
-        public static List<PublicationBrief> publicationBriefQuery(int researcherID)
+        public static List<PublicationBrief> publicationBriefQuery()
         {
             List<PublicationBrief> newPublicationBriefArray = new List<PublicationBrief>(); //establishes publication array instantiation in memory
             newPublicationBriefArray.Add(new PublicationBrief("computationally expensive", "1995")); // pretend if this is a SELECT * FROM Retrieval query and iteration from a FOR loop

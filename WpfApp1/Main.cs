@@ -8,13 +8,13 @@ namespace ResearcherRAP_Project
     {
         static void MainTemp(string[] args) // renamed as main is called later in the application document for the WPF instantiation
         {
-            List<PublicationBrief> testMe = DBAdapter.publicationQuery(1);
+            List<PublicationBrief> testMe = DBAdapter.publicationBriefQuery();
             Console.WriteLine("test\n");
             int i = 0; // 0 initialized for publication increment
 
             foreach (PublicationBrief publication in testMe)
             {
-                Console.WriteLine(i + " " + publication.name + " " + publication.year);
+                Console.WriteLine(i + " " + publication.publicationName + " " + publication.publicationYear);
                 i++;
             }
 
@@ -23,13 +23,13 @@ namespace ResearcherRAP_Project
 
             //LINQ Query, seperate to SQL DBAdapter Return
             var query1 = from PublicationBrief publication in testMe
-                         where publication.name != "applied logistics"
+                         where publication.publicationName != "applied logistics"
                          select publication;
 
             //LINQ Query iteration
             foreach (PublicationBrief x in query1) // -- x in this case refers to the publication object/element reference.
             {
-                Console.WriteLine(x.name + " " + x.year);
+                Console.WriteLine(x.publicationName + " " + x.publicationYear);
             }
 
             //To Pause Console Readout for testing
