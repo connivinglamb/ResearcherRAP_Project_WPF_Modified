@@ -13,27 +13,32 @@ namespace ResearcherRAP_Project
             List<ResearcherBrief> newResearcherBriefArray = new List<ResearcherBrief>();
             return newResearcherBriefArray;
         }
-        public static List<ResearcherDetailed> researcherDetailedQuery(int researcherID) {
+
+        public static List<ResearcherDetailed> researcherDetailedQuery(int researcherID) 
+        {
             List<ResearcherDetailed> newResearcherDetailedArray = new List<ResearcherDetailed>();
             return newResearcherDetailedArray;
         }
+
         public static List<PublicationBrief> publicationBriefQuery(int researcherID)
         {
             List<PublicationBrief> newPublicationBriefArray = new List<PublicationBrief>(); //establishes publication array instantiation in memory
-            newPublicationBriefArray.Add(new PublicationBrief { name = "applied logistics", year = "1999" }); // pretend if this is a SELECT * FROM Retrieval query and iteration from a FOR loop
-            newPublicationBriefArray.Add(new PublicationBrief { name = "computation heiarchy", year = "1998" });
+            newPublicationBriefArray.Add(new PublicationBrief { publicationName = "applied logistics", publicationYear = "1999" }); // pretend if this is a SELECT * FROM Retrieval query and iteration from a FOR loop
+            newPublicationBriefArray.Add(new PublicationBrief { publicationName = "computation heiarchy", publicationYear = "1998" });
             return newPublicationBriefArray;
         }
-        public static List<PublicationDetailed> publicationDetailedQuery(int researcherID) { // modify int values to date objects later
 
-
+        public static List<PublicationDetailed> publicationDetailedQuery(int researcherID) 
+        { // modify int values to date objects later
 
             List<PublicationDetailed> newPublicationArray = new List<PublicationDetailed>();
             return newPublicationArray;
         }
+
         public static List<PublicationBrief> publicationBriefQeuery(int researcherID)
         {
             List<PublicationBrief> newPublicationBriefArray = new List<PublicationBrief>();
+
             return newPublicationBriefArray;
         }
         

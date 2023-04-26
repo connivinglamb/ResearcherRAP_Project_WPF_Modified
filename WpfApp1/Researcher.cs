@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System;
 using System.Collections.Generic;
 using static ResearcherRAP_Project.ResearcherDetailed;
+using System.Runtime.CompilerServices;
 
 namespace ResearcherRAP_Project
 {
@@ -88,6 +89,11 @@ namespace ResearcherRAP_Project
 
         //implement tostring function here
     }
+    public class PublicationBrief //formerly cumulative
+    {
+        public string publicationName;
+        public string publicationYear;
+    }
     public class PublicationDetailed
     {
         public enum PublicationType { Conference, Journal, Other };
@@ -105,16 +111,52 @@ namespace ResearcherRAP_Project
         public DateTime availabilityDate;
     }
     
-    public class PublicationBrief //formerly cumulative
-    {
-        public string name;
-        public string year;
-    }
     public class ResearcherReport
     {
         public enum ReportGrade { poor, below_expectations, meeting_minimum, star_performer }
         public ReportGrade grade;
+        public string researcherNameFirst;
+        public string researcherNameLast;
 
+        public ResearcherReport(int gradeValue, string first, string last)
+        {
+            grade = new ReportGrade(); //instansiate grade 
+
+            switch (gradeValue)
+            {
+                default:
+                    throw new ArgumentException("Error: invalid Researcher Report Grade! closing now");
+                    break;
+
+                case <= 70:
+                    grade = ReportGrade.poor; 
+                    break;
+
+                case > 70 and <= 110:
+                    grade = ReportGrade.below_expectations;
+                    break;
+
+                case > 110 and < 200:
+                    grade = ReportGrade.meeting_minimum;
+                    break;
+
+                case >= 200:
+                    grade = ReportGrade.star_performer;
+                    break;
+            }
+
+            try
+            {
+                researcherNameFirst = first;
+                researcherNameLast = last;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Error: researcher Name values invalid");
+            }
+
+            
+        }
     }
 
 }
