@@ -44,6 +44,8 @@ namespace ResearcherRAP_Project
 
         public string? degree; //students only (Nullable)
         public string? supervisor; //students only (Nullable)
+
+        public int supervisions; //staff only (Nullable)
         public float? threeYearAverage; //staff only (Nullable)
         public float? fundingReceived; //staff only (Nullable)
         public float? performancebyPublication; //staff only (Nullable)
@@ -52,8 +54,6 @@ namespace ResearcherRAP_Project
         public DateTime commencedWithInstitution;
         public DateTime commencedCurrentPosition;
         public DateTime tenure;
-
-        
 
         public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, List<PublicationBrief> publicationsCache, List<PublicationBrief> publicationsTemp)
         {
@@ -72,10 +72,12 @@ namespace ResearcherRAP_Project
             this.q1Percentage = q1Percentage;
             this.degree = degree;
             this.supervisor = supervisor;
-            this.threeYearAverage = threeYearAverage;
+
+            this.threeYearAverage = threeYearAverage; //more work needs to be done here for null values in constructor
             this.fundingReceived = fundingReceived;
             this.performancebyPublication = performancebyPublication;
             this.performancebyFunding = performancebyFunding;
+
             this.commencedWithInstitution = commencedWithInstitution;
             this.commencedCurrentPosition = commencedCurrentPosition;
             this.tenure = tenure;
@@ -87,12 +89,27 @@ namespace ResearcherRAP_Project
         public DateTime staffResearcherPositionStart;
         public DateTime staffResearcherPositionEnd;
 
-        //implement tostring function here
+        public ResearcherDetailsBrief(string previousPosition, DateTime startDate, DateTime endDate)
+        {
+            this.staffResearcherPreviousPosition = previousPosition;
+            this.staffResearcherPositionStart = startDate;
+            this.staffResearcherPositionEnd = endDate;
+        }
+        public void ToString()
+        {
+            //To string function for researcherDetails brief in format : position, start - end
+        }
     }
     public class PublicationBrief //formerly cumulative
     {
         public string publicationName;
         public string publicationYear;
+
+        public PublicationBrief(string name, string year)
+        {
+            this.publicationName = publicationName;
+            this.publicationYear = publicationYear;
+        }
     }
     public class PublicationDetailed
     {
@@ -109,6 +126,19 @@ namespace ResearcherRAP_Project
 
         public DateTime publicationYear;
         public DateTime availabilityDate;
+
+        public PublicationDetailed(PublicationType type, string doi, string title, string authors, string ranking, string citeAs, int age, DateTime publicationYear, DateTime availabilityDate)
+        {
+            this.type = type;
+            this.doi = doi;
+            this.title = title;
+            this.authors = authors;
+            this.ranking = ranking;
+            this.citeAs = citeAs;
+            this.age = age;
+            this.publicationYear = publicationYear;
+            this.availabilityDate = availabilityDate;
+        }
     }
     
     public class ResearcherReport
@@ -129,19 +159,19 @@ namespace ResearcherRAP_Project
                     break;
 
                 case <= 70:
-                    grade = ReportGrade.poor; 
+                    this.grade = ReportGrade.poor; 
                     break;
 
                 case > 70 and <= 110:
-                    grade = ReportGrade.below_expectations;
+                    this.grade = ReportGrade.below_expectations;
                     break;
 
                 case > 110 and < 200:
-                    grade = ReportGrade.meeting_minimum;
+                    this.grade = ReportGrade.meeting_minimum;
                     break;
 
                 case >= 200:
-                    grade = ReportGrade.star_performer;
+                    this.grade = ReportGrade.star_performer;
                     break;
             }
 
@@ -154,8 +184,6 @@ namespace ResearcherRAP_Project
             {
                 throw new ArgumentException("Error: researcher Name values invalid");
             }
-
-            
         }
     }
 
