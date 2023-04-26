@@ -113,7 +113,8 @@ namespace ResearcherRAP_Project
     public class ResearcherReport
     {
         public enum ReportGrade { poor, below_expectations, meeting_minimum, star_performer }
-        public string 
+        public ReportGrade grade;
+
     }
 
 }

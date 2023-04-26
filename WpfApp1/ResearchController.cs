@@ -13,6 +13,7 @@ namespace ResearcherRAP_Project
         public string filterName;
         public static int researcherID;
         public static List<ResearcherDetailsBrief> researcherDetailsBriefCache;
+        public static List<ResearcherDetailsBrief> researcherDetailsBriefTemp;
 
         public static List<ResearcherBrief> applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
@@ -23,6 +24,7 @@ namespace ResearcherRAP_Project
         }
         public static List<ResearcherBrief> populateCache(List<ResearcherBrief> ListCache)
         {
+
             return ListCache;
         }
         public void showResearcherDetails(int researcherID)
@@ -48,10 +50,6 @@ public class ResearcherBriefController
 
         }
         public void loadResearcherDetails(int researcherID)
-        {
-
-        }
-        public void ResearcherBriefController(int researcherID)
         {
 
         }

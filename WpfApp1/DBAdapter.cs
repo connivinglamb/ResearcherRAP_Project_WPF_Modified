@@ -31,7 +31,11 @@ namespace ResearcherRAP_Project
             List<PublicationDetailed> newPublicationArray = new List<PublicationDetailed>();
             return newPublicationArray;
         }
-        public static List<PublicationDetailed> 
+        public static List<PublicationBrief> publicationBriefQeuery(int researcherID)
+        {
+            List<PublicationBrief> newPublicationBriefArray = new List<PublicationBrief>();
+            return newPublicationBriefArray;
+        }
         
     }
 }
