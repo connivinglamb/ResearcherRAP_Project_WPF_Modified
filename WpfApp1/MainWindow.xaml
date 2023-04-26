@@ -27,7 +27,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding}" Grid.Column="1" /> //if i dont figure out how the fuck the binding does not work i am going to lose it
+                        <TextBlock Text="{Binding}" Grid.Column="1" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
