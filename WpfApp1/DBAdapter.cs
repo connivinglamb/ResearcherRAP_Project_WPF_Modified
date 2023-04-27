@@ -14,7 +14,6 @@ namespace ResearcherRAP_Project
             newResearcherBriefArray.Add(new ResearcherBrief(ResearcherType.Staff, ResearcherLevel.A, "David", "Herbert","Dr",0));
             newResearcherBriefArray.Add(new ResearcherBrief(ResearcherType.Staff, ResearcherLevel.C, "Brian", "Stuart","Mr",1));
             newResearcherBriefArray.Add(new ResearcherBrief(ResearcherType.Student, ResearcherLevel.D, "Maria", "Kelly","Ms",2));
-
             return newResearcherBriefArray;
         }
 
@@ -46,10 +45,11 @@ namespace ResearcherRAP_Project
             return newPublicationBriefArray;
         }
 
-        public static void supervisionsQuery(int researcherID)
+        public static List<ResearcherSupervision> supervisionsQuery(int researcherID)
         {
-            //is supposed to return an array, but no array for supervisions exist
-            //Todo: create array for researher supervisions and complete 
+            List<ResearcherSupervision> newSupervisionsArray = new List<ResearcherSupervision>();
+
+            return newSupervisionsArray;
         }
         
     }

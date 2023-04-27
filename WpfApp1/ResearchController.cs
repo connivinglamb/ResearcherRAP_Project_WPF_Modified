@@ -96,7 +96,7 @@ namespace ResearcherRAP_Project
 
         public void loadPublications(int researcherID)
         {
-            
+                
         }
 
         public void publicationsFilter(int yearMin, int yearMax)

@@ -156,6 +156,18 @@ namespace ResearcherRAP_Project
             this.availabilityDate = availabilityDate;
         }
     }
+
+    public class ResearcherSupervision
+    {
+        public int id;
+        public string name;
+
+        public ResearcherSupervision(int id, string name)
+        {
+            this.id = id;
+            this.name = name;
+        }
+    }
     
     public class ResearcherReport
     {
