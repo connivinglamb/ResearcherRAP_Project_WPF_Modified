@@ -38,6 +38,7 @@ namespace ResearcherRAP_Project
         }
         public static List<ResearcherBrief> loadResearchers()
         {
+            researcherDetailsBriefTemp = populateCache(researcherDetailsBriefTemp);
             return researcherDetailsBriefTemp;
         }
         public void showResearcherDetails()
@@ -47,25 +48,6 @@ namespace ResearcherRAP_Project
 
     }
 
-public class ResearcherDetailedController
-    {
-        public void userViewsPublications(int researcherID)
-        {
-
-        }
-        public void userViewsCumulativeCount(int researcherID)
-        {
-
-        }
-        public void userViewsExpandsSupervisions(int researcherID)
-        {
-
-        }
-        public void loadResearcherDetails(int researcherID)
-        {
-
-        }
-    }
     class ReportController
     {
         public void reportClipboardRetrieve(List<ResearcherReport> reportCacheCurrent)
@@ -132,7 +114,7 @@ public class ResearcherDetailedController
         public List<PublicationDetailed> loadPublication(int researcherID, int publicationID)
         {
             List<PublicationDetailed> newPublicationDetailed = new List<PublicationDetailed>();
-
+            //newPublicationDetailed.Add( DBAdapter.publicationBriefQeuery(publicationID));
             return newPublicationDetailed;
         }
     }

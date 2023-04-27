@@ -37,5 +37,10 @@ namespace ResearcherRAP_Project
             researcherList.ItemsSource = testValues;
             Debug.WriteLine(testValues[0].nameGiven);
         }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Button Clicked!");
+        }
     }
 }
