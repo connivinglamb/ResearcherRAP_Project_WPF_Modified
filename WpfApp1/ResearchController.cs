@@ -49,7 +49,6 @@ namespace ResearcherRAP_Project
 
 public class ResearcherDetailedController
     {
-        private static int researcherID;
         public void userViewsPublications(int researcherID)
         {
 
@@ -69,30 +68,88 @@ public class ResearcherDetailedController
     }
     class ReportController
     {
+        public void reportClipboardRetrieve(List<ResearcherReport> reportCacheCurrent)
+        {
 
+        }
+        public List<ResearcherReport> reportGenerate(int performanceFilter)
+        {
+            List<ResearcherReport> newResearcherReport = new List<ResearcherReport>();
+
+            return newResearcherReport;
+        }
+
+        public void reportClipboadRetrieve(List<ResearcherReport> reportCacheCurrent)
+        {
+
+        }
     }
     class ResearcherDetailsController
     {
+        public void loadResearcherDetails(int researcherID)
+        {
+            
+        }
+        public void userViewsPublications(int researcherID, int publicaitonID)
+        {
+            
+        }
 
+        public void userViewsCumulativeCount(int researcherID)
+        {
+
+        }
+
+        public void userExpandsSupervisions(int researcherID)
+        {
+            
+        }
     }
 
     class PublicationsController
     {
+        public Boolean publicationsInverted;
+        public DateTime publicationsYearMin;
+        public DateTime publicationsYearMax;
 
+        public void loadPublications(int researcherID)
+        {
+            
+        }
+
+        public void publicationsFilter(int yearMin, int yearMax)
+        {
+            //convert userinput to DateTime format
+            DateTime newYearMin = DateTime.Parse(yearMin.ToString());
+            DateTime newYearMax = DateTime.Parse(yearMax.ToString());
+
+
+        }
     }
 
     class PublicationDetailsController
     {
+        public List<PublicationDetailed> loadPublication(int researcherID, int publicationID)
+        {
+            List<PublicationDetailed> newPublicationDetailed = new List<PublicationDetailed>();
 
+            return newPublicationDetailed;
+        }
     }
 
     class SupervisionsController
     {
-
+        public void loadSupervisions(int researcherID)
+        {
+            
+        }
     }
 
     class ResearcherCumulativeCountController
     {
-
+        public void loadResearcherCumulativeCount(int researcherID)
+        {
+            
+        }
     }
 }
