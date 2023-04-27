@@ -61,7 +61,7 @@ namespace ResearcherRAP_Project
         public string? degree; //students only (Nullable)
         public string? supervisor; //students only (Nullable)
 
-        public int supervisions; //staff only (Nullable)
+        public List<ResearcherDetailed>? supervisions; //staff only (Nullable)
         public float? threeYearAverage; //staff only (Nullable)
         public float? fundingReceived; //staff only (Nullable)
         public float? performancebyPublication; //staff only (Nullable)
@@ -123,8 +123,8 @@ namespace ResearcherRAP_Project
 
         public PublicationBrief(string name, string year)
         {
-            this.publicationName = publicationName;
-            this.publicationYear = publicationYear;
+            this.publicationName = name;
+            this.publicationYear = year;
         }
     }
     public class PublicationDetailed
@@ -140,10 +140,15 @@ namespace ResearcherRAP_Project
         public string citeAs;
         public int age;
 
-        public DateTime publicationYear;
+        public int year;
         public DateTime availabilityDate;
 
-        public PublicationDetailed(PublicationType type, string doi, string title, string authors, string ranking, string citeAs, int age, DateTime publicationYear, DateTime availabilityDate)
+        public int Age()
+        {
+            return DateTime.Now.Year - year;
+        }
+
+        public PublicationDetailed(PublicationType type, string doi, string title, string authors, string ranking, string citeAs, int year, DateTime availabilityDate)
         {
             this.type = type;
             this.doi = doi;
@@ -151,9 +156,9 @@ namespace ResearcherRAP_Project
             this.authors = authors;
             this.ranking = ranking;
             this.citeAs = citeAs;
-            this.age = age;
-            this.publicationYear = publicationYear;
+            this.year = year;
             this.availabilityDate = availabilityDate;
+            this.Age();
         }
     }
 
