@@ -11,7 +11,7 @@ namespace ResearcherRAP_Project
 {
     /*ResearcherLevel and type utilized both in ResearcherDetailed and ResearcherBrief Hence is put here*/
     public enum ResearcherLevel { A, B, C, D, E };
-    public enum ResearcherType { Staff, Student };
+    public enum ResearcherType { Staff, Student };  
 
     public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
     {
