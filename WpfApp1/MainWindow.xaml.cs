@@ -25,20 +25,7 @@ namespace ResearcherRAP_Project
         {
             InitializeComponent();
             Debug.WriteLine("\ntest_initmainwindow\n");
-            ResearcherBriefController controller_brief = new ResearcherBriefController();
-            List<ResearcherBrief> testValues = ResearcherBriefController.loadResearchers();
-
-            /*foreach (ResearcherBrief x in testValues)
-            {
-                Debug.WriteLine(x.ToString());
-                researcherList.ItemsSource = x.nameGiven;
-            }*/
-
-            if (testValues != null)
-            {
-                researcherList.ItemsSource = testValues;
-                Debug.WriteLine(testValues[0].nameGiven);
-            }
+            
         }
 
         private void OnClick(object sender, RoutedEventArgs e)

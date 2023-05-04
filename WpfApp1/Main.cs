@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ResearcherRAP_Project
@@ -8,7 +8,7 @@ namespace ResearcherRAP_Project
     {
         static void MainTemp(string[] args) // renamed as main is called later in the application document for the WPF instantiation
         {
-            List<PublicationBrief> testMe = DBAdapter.publicationBriefQuery();
+            ObservableCollection<PublicationBrief> testMe = DBAdapter.publicationBriefQuery();
             Console.WriteLine("test\n");
             int i = 0; // 0 initialized for publication increment
 

@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using static ResearcherRAP_Project.ResearcherDetailed;
 using System.Runtime.CompilerServices;
 
@@ -15,14 +16,14 @@ namespace ResearcherRAP_Project
     public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
     {
         public ResearcherType type;
-        public ResearcherLevel level;
+        public ResearcherLevel? level;
 
         public string nameGiven;
         public string nameFamily;
         public string title;
         public int  researcherID;
 
-        public ResearcherBrief(ResearcherType type, ResearcherLevel level, string nameGiven, string nameFamily, string title, int researcherID)
+        public ResearcherBrief(ResearcherType type, ResearcherLevel? level, string nameGiven, string nameFamily, string title, int researcherID)
         {
             this.type = type;
             this.level = level;
@@ -32,7 +33,7 @@ namespace ResearcherRAP_Project
             this.researcherID = researcherID;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string outputString = string.Format("{0} {1} ({2})", this.nameGiven, this.nameFamily, this.title);
             return outputString;
@@ -61,7 +62,7 @@ namespace ResearcherRAP_Project
         public string? degree; //students only (Nullable)
         public string? supervisor; //students only (Nullable)
 
-        public List<ResearcherDetailed>? supervisions; //staff only (Nullable)
+        public ObservableCollection<ResearcherDetailed>? supervisions; //staff only (Nullable)
         public float? threeYearAverage; //staff only (Nullable)
         public float? fundingReceived; //staff only (Nullable)
         public float? performancebyPublication; //staff only (Nullable)
@@ -71,7 +72,7 @@ namespace ResearcherRAP_Project
         public DateTime commencedCurrentPosition;
         public DateTime tenure;
 
-        public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, List<PublicationBrief> publicationsCache, List<PublicationBrief> publicationsTemp)
+        public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, ObservableCollection<PublicationBrief> publicationsCache, ObservableCollection<PublicationBrief> publicationsTemp)
         {
             this.type = type;
             this.campus = campus;

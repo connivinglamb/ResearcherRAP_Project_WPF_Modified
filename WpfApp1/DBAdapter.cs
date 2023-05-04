@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,6 +13,11 @@ namespace ResearcherRAP_Project
     class DBAdapter
     {
         private static MySqlConnection conn;
+
+        public static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value);
+        }
         private static MySqlConnection GetConnection()
         {
             if (conn == null)
@@ -23,7 +29,7 @@ namespace ResearcherRAP_Project
             return conn;
         }
 
-        public static List<ResearcherBrief> researcherBriefQuery()
+        public static List<ResearcherBrief> ResearcherBriefQuery()
         {
             List<ResearcherBrief> newResearcherBriefArray = new List<ResearcherBrief>();
             MySqlDataReader dbReader = null;
@@ -32,18 +38,26 @@ namespace ResearcherRAP_Project
                 GetConnection();
                 conn.Open();
                 Debug.WriteLine(conn);
-                MySqlCommand getResearcherBrief = new MySqlCommand("SELECT id, type, given_name, family_name,title,level FROM researcher");
-                MySqlDataReader mySqlDataReader = getResearcherBrief.ExecuteReader();
-                dbReader = mySqlDataReader; // Exception Thrown Here, no idea where its coming from
+                MySqlCommand getResearcherBrief = new MySqlCommand("SELECT id, type, given_name, family_name, title, level FROM researcher", conn);
+                dbReader = getResearcherBrief.ExecuteReader(); // Exception Thrown Here, no idea where its coming from
 
                 while (dbReader.Read())
                 {
-                    ResearcherType researcherType = (ResearcherType)dbReader[1];
-                    ResearcherLevel researcherLevel = (ResearcherLevel)dbReader[5];
-                    string researcherNameFirst = (string)dbReader[2];
-                    string researcherNameLast = (string)dbReader[3];
-                    string researcherTitle = (string)dbReader[4];
-                    int researcherID = (int)dbReader[0];
+                    ResearcherType researcherType = ParseEnum<ResearcherType>(dbReader.GetString(1));
+                    ResearcherLevel? researcherLevel;
+                    if (dbReader.IsDBNull(5))
+                    {
+                        researcherLevel = null;
+                    }
+                    else
+                    {
+                        researcherLevel = (ResearcherLevel?)ParseEnum<ResearcherLevel>(dbReader.GetString(5));
+                    }
+                    
+                    string researcherNameFirst = dbReader.GetString(2);
+                    string researcherNameLast = dbReader.GetString(3);
+                    string researcherTitle = dbReader.GetString(4);
+                    int researcherID = dbReader.GetInt32(0);
 
                     newResearcherBriefArray.Add(new ResearcherBrief(researcherType, researcherLevel, researcherNameFirst, researcherNameLast, researcherTitle, researcherID));
                 }
@@ -64,37 +78,37 @@ namespace ResearcherRAP_Project
             return newResearcherBriefArray;
         }
 
-        public static List<ResearcherDetailed> researcherDetailedQuery(int researcherID) 
+        public static ObservableCollection<ResearcherDetailed> researcherDetailedQuery(int researcherID) 
         {
-            List<ResearcherDetailed> newResearcherDetailedArray = new List<ResearcherDetailed>();
+            ObservableCollection<ResearcherDetailed> newResearcherDetailedArray = new ObservableCollection<ResearcherDetailed>();
             return newResearcherDetailedArray;
         }
 
-        public static List<PublicationBrief> publicationBriefQuery()
+        public static ObservableCollection<PublicationBrief> publicationBriefQuery()
         {
-            List<PublicationBrief> newPublicationBriefArray = new List<PublicationBrief>(); //establishes publication array instantiation in memory
+            ObservableCollection<PublicationBrief> newPublicationBriefArray = new ObservableCollection<PublicationBrief>(); //establishes publication array instantiation in memory
             newPublicationBriefArray.Add(new PublicationBrief("computationally expensive", "1995")); // pretend if this is a SELECT * FROM Retrieval query and iteration from a FOR loop
             newPublicationBriefArray.Add(new PublicationBrief("research1", "1993"));
             return newPublicationBriefArray;
         }
 
-        public static List<PublicationDetailed> publicationDetailedQuery(int researcherID) 
+        public static ObservableCollection<PublicationDetailed> publicationDetailedQuery(int researcherID) 
         { // modify int values to date objects later
 
-            List<PublicationDetailed> newPublicationArray = new List<PublicationDetailed>();
+            ObservableCollection<PublicationDetailed> newPublicationArray = new ObservableCollection<PublicationDetailed>();
             return newPublicationArray;
         }
 
-        public static List<PublicationBrief> publicationBriefQeuery(int researcherID)
+        public static ObservableCollection<PublicationBrief> publicationBriefQeuery(int researcherID)
         {
-            List<PublicationBrief> newPublicationBriefArray = new List<PublicationBrief>();
+            ObservableCollection<PublicationBrief> newPublicationBriefArray = new ObservableCollection<PublicationBrief>();
 
             return newPublicationBriefArray;
         }
 
-        public static List<ResearcherSupervision> supervisionsQuery(int researcherID)
+        public static ObservableCollection<ResearcherSupervision> supervisionsQuery(int researcherID)
         {
-            List<ResearcherSupervision> newSupervisionsArray = new List<ResearcherSupervision>();
+            ObservableCollection<ResearcherSupervision> newSupervisionsArray = new ObservableCollection<ResearcherSupervision>();
 
             return newSupervisionsArray;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -10,35 +11,40 @@ namespace ResearcherRAP_Project
     public class ResearcherBriefController
     {
         public static int filterRange;
-        public static string filterName;
-        public static int? researcherID;
+        public static string? filterName;
+        public static int researcherID;
 
-        public static List<ResearcherBrief> researcherDetailsBriefCache;
-        public static List<ResearcherBrief> researcherDetailsBriefTemp;
+        private static List<ResearcherBrief> researcherDetailsBriefCache;
+        private static ObservableCollection<ResearcherBrief> researcherDetailsBriefTemp;
 
-        public static List<ResearcherBrief> applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
+        public static void applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
-            List<ResearcherBrief> listTemp = new List<ResearcherBrief>(listCache); //clones cached original list
+            researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(listCache); //clones cached original list
             /*Filter implementation Here
              */ 
-            return listTemp;
         }
         public static List<ResearcherBrief> populateCache(List<ResearcherBrief> ListCache)
         {
-            ListCache = DBAdapter.researcherBriefQuery();
+            ListCache = DBAdapter.ResearcherBriefQuery();
             return ListCache;
         }
+
         public ResearcherBriefController()
         {
             filterRange = 0;
             filterName = "";
             researcherID = 0;
             researcherDetailsBriefCache = populateCache(researcherDetailsBriefCache);
-            researcherDetailsBriefTemp = researcherDetailsBriefCache;
+            researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(researcherDetailsBriefCache);
         }
         public static List<ResearcherBrief> loadResearchers()
         {
-            researcherDetailsBriefTemp = populateCache(researcherDetailsBriefTemp);
+            researcherDetailsBriefCache = populateCache(researcherDetailsBriefCache);
+            return researcherDetailsBriefCache;
+        }
+
+        public static ObservableCollection<ResearcherBrief> getResearcherBriefTemp() 
+        {
             return researcherDetailsBriefTemp;
         }
         public void showResearcherDetails()
@@ -50,18 +56,18 @@ namespace ResearcherRAP_Project
 
     class ReportController
     {
-        public void reportClipboardRetrieve(List<ResearcherReport> reportCacheCurrent)
+        public void reportClipboardRetrieve(ObservableCollection<ResearcherReport> reportCacheCurrent)
         {
 
         }
-        public List<ResearcherReport> reportGenerate(int performanceFilter)
+        public ObservableCollection<ResearcherReport> reportGenerate(int performanceFilter)
         {
-            List<ResearcherReport> newResearcherReport = new List<ResearcherReport>();
+            ObservableCollection<ResearcherReport> newResearcherReport = new ObservableCollection<ResearcherReport>();
 
             return newResearcherReport;
         }
 
-        public void reportClipboadRetrieve(List<ResearcherReport> reportCacheCurrent)
+        public void reportClipboadRetrieve(ObservableCollection<ResearcherReport> reportCacheCurrent)
         {
 
         }
@@ -111,9 +117,9 @@ namespace ResearcherRAP_Project
 
     class PublicationDetailsController
     {
-        public List<PublicationDetailed> loadPublication(int researcherID, int publicationID)
+        public ObservableCollection<PublicationDetailed> loadPublication(int researcherID, int publicationID)
         {
-            List<PublicationDetailed> newPublicationDetailed = new List<PublicationDetailed>();
+            ObservableCollection<PublicationDetailed> newPublicationDetailed = new ObservableCollection<PublicationDetailed>();
             //newPublicationDetailed.Add( DBAdapter.publicationBriefQeuery(publicationID));
             return newPublicationDetailed;
         }
