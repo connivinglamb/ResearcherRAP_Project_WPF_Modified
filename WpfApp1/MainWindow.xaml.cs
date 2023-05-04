@@ -34,11 +34,7 @@ namespace ResearcherRAP_Project
                 researcherList.ItemsSource = x.nameGiven;
             }*/
 
-            if (testValues != null)
-            {
-                researcherList.ItemsSource = testValues;
-                Debug.WriteLine(testValues[0].nameGiven);
-            }
+
         }
 
         private void OnClick(object sender, RoutedEventArgs e)

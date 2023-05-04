@@ -32,9 +32,8 @@ namespace ResearcherRAP_Project
                 GetConnection();
                 conn.Open();
                 Debug.WriteLine(conn);
-                MySqlCommand getResearcherBrief = new MySqlCommand("SELECT id, type, given_name, family_name,title,level FROM researcher");
-                MySqlDataReader mySqlDataReader = getResearcherBrief.ExecuteReader();
-                dbReader = mySqlDataReader; // Exception Thrown Here, no idea where its coming from
+                MySqlCommand getResearcherBrief = new MySqlCommand("SELECT id, type, given_name, family_name,title,level FROM researcher", conn);
+                dbReader = getResearcherBrief.ExecuteReader();
 
                 while (dbReader.Read())
                 {
