@@ -14,8 +14,8 @@ namespace ResearcherRAP_Project
         public static string? filterName;
         public static int researcherID;
 
-        private static List<ResearcherBrief> researcherDetailsBriefCache;
-        private static ObservableCollection<ResearcherBrief> researcherDetailsBriefTemp;
+        public static List<ResearcherBrief> researcherDetailsBriefCache;
+        public static ObservableCollection<ResearcherBrief> researcherDetailsBriefTemp;
 
         public static void applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
@@ -23,7 +23,7 @@ namespace ResearcherRAP_Project
             if (!string.IsNullOrEmpty(filterName))
             {
                 System.Text.RegularExpressions.Regex searchTerm = new System.Text.RegularExpressions.Regex(filterName);
-                filteredList = (List<ResearcherBrief>)(from entry in listCache where (entry.nameGiven.Contains(filterName) || entry.nameFamily.Contains(filterName)) select entry);
+                filteredList = (List<ResearcherBrief>)(from entry in listCache where (entry.nameGiven.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) || entry.nameFamily.Contains(filterName, StringComparison.CurrentCultureIgnoreCase)) select entry);
             }
              researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(filteredList);
         }

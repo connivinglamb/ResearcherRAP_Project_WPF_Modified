@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,11 @@ namespace ResearcherRAP_Project
                 MessageBox.Show(GlobalVariables.GlobalResearcherID.ToString());
 
             }
+        }
+
+        private void listFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ResearcherBriefController.applyFilters(ResearcherBriefController.researcherDetailsBriefCache, 0, listFilter.Text);
         }
     }
 }

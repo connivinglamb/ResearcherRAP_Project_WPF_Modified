@@ -7,11 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <local:ResearcherBriefController x:Key="ResearcherBrief"/>
-        <ObjectDataProvider x:Key="ResearcherBriefList"
-            ObjectInstance ="{StaticResource ResearcherBrief}"
-            MethodName="getResearcherBriefTemp">
-        </ObjectDataProvider>
+       
     </Window.Resources>
     <Grid Margin="0,2">
         <Grid.ColumnDefinitions>
@@ -20,17 +16,17 @@
             <ColumnDefinition Width="40*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*" />
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
         <Button HorizontalContentAlignment="Stretch" Click="OnClick" Grid.ColumnSpan="2" Margin="6,0,314,0">FilterCommand</Button>
         <Button Grid.Column="1">TestButton2</Button>
 
         <ListBox Name="researcherList"
-                 Grid.Column="2" SelectedIndex="0" Margin="0,1,0,0" SelectionChanged="LoadResearcherDetails"
-                 ItemsSource="{Binding Source={StaticResource ResearcherBriefList}}"/>
-        <TextBox Name="listFilter"
-                 Grid.Row="1"></TextBox>
+                 Grid.Column="2" SelectedIndex="0" Margin="0,1,0,0"
+                 ItemsSource="{Binding Source={StaticResource ResearcherBriefList}}"
+                 DataContext="{StaticResource ResearcherBriefList}"/>
+        <TextBox Name="listFilter" Margin="0,170,0,0" Grid.RowSpan="2" TextChanged="listFilter_TextChanged" />
     </Grid>
 </Window>
