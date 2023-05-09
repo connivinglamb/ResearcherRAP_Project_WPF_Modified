@@ -20,7 +20,7 @@ namespace ResearcherRAP_Project
 
         public string nameGiven;
         public string nameFamily;
-        public string title;
+        public string title { get; set; }
         public int  researcherID;
 
         public ResearcherBrief(ResearcherType type, ResearcherLevel? level, string nameGiven, string nameFamily, string title, int researcherID)
@@ -35,7 +35,7 @@ namespace ResearcherRAP_Project
 
         public override string ToString()
         {
-            string outputString = string.Format("{0} {1} ({2})", this.nameGiven, this.nameFamily, this.title);
+            string outputString = string.Format("{0} {1} ({2}) {3}", this.nameGiven, this.nameFamily, this.title, this.researcherID);
             return outputString;
         }
     }

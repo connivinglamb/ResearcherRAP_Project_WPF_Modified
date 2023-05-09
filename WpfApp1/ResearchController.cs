@@ -19,9 +19,13 @@ namespace ResearcherRAP_Project
 
         public static void applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
-            researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(listCache); //clones cached original list
-            /*Filter implementation Here
-             */ 
+            List<ResearcherBrief> filteredList = listCache;
+            if (!string.IsNullOrEmpty(filterName))
+            {
+                System.Text.RegularExpressions.Regex searchTerm = new System.Text.RegularExpressions.Regex(filterName);
+                filteredList = (List<ResearcherBrief>)(from entry in listCache where (entry.nameGiven.Contains(filterName) || entry.nameFamily.Contains(filterName)) select entry);
+            }
+             researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(filteredList);
         }
         public static List<ResearcherBrief> populateCache(List<ResearcherBrief> ListCache)
         {
