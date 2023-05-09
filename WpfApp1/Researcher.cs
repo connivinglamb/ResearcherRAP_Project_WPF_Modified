@@ -11,7 +11,12 @@ namespace ResearcherRAP_Project
 {
     /*ResearcherLevel and type utilized both in ResearcherDetailed and ResearcherBrief Hence is put here*/
     public enum ResearcherLevel { A, B, C, D, E };
-    public enum ResearcherType { Staff, Student };  
+    public enum ResearcherType { Staff, Student };
+
+    public static class GlobalVariables
+    {
+        public static int GlobalResearcherID;
+    }
 
     public class ResearcherBrief //formerly researcherList - to implement!, is the shortform class used for list indexing to save space as we dont need to traverse and cache all of the records
     {
@@ -21,7 +26,7 @@ namespace ResearcherRAP_Project
         public string nameGiven;
         public string nameFamily;
         public string title { get; set; }
-        public int  researcherID;
+        public int researcherID;
 
         public ResearcherBrief(ResearcherType type, ResearcherLevel? level, string nameGiven, string nameFamily, string title, int researcherID)
         {

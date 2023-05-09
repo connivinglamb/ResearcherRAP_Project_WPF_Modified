@@ -32,5 +32,17 @@ namespace ResearcherRAP_Project
         {
             MessageBox.Show("Button Clicked!");
         }
+
+        private void LoadResearcherDetails(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.RemovedItems.Count > 0)
+            {
+                string pulledResearcher = e.AddedItems[0].ToString();
+                GlobalVariables.GlobalResearcherID = int.Parse(pulledResearcher.Substring(pulledResearcher.Length - 6));
+                DBAdapter.researcherDetailedQuery(GlobalVariables.GlobalResearcherID);
+                MessageBox.Show(GlobalVariables.GlobalResearcherID.ToString());
+
+            }
+        }
     }
 }

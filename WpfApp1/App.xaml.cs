@@ -10,6 +10,7 @@ namespace ResearcherRAP_Project
 {
     /// <summary>
     /// Interaction logic for App.xaml
+    /// VERY IMPORTANT, DO NOT DELET
     /// </summary>
     public partial class ResearcherBriefView : Application //please for the love of god this is where the program starts, do not forget!
     {

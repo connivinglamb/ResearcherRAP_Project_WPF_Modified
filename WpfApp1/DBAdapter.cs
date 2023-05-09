@@ -81,6 +81,32 @@ namespace ResearcherRAP_Project
         public static ObservableCollection<ResearcherDetailed> researcherDetailedQuery(int researcherID) 
         {
             ObservableCollection<ResearcherDetailed> newResearcherDetailedArray = new ObservableCollection<ResearcherDetailed>();
+            MySqlDataReader dbReader = null;
+
+            try
+            {
+                GetConnection();
+                conn.Open();
+                Debug.WriteLine(conn);
+
+                MySqlCommand getResearcherBrief = new MySqlCommand("SELECT * FROM researcher WHERE id = @newID", conn);
+                getResearcherBrief.Parameters.Add("@newID", MySqlDbType.Int64);
+                getResearcherBrief.Parameters["@newID"].Value = researcherID;
+                dbReader = getResearcherBrief.ExecuteReader();
+            }
+
+            catch
+            {
+                Debug.WriteLine("Exception Thrown!");
+            }
+
+            finally
+            {
+                if (dbReader != null)
+                { dbReader.Close(); }
+                if (conn != null)
+                { conn.Close(); }
+            }
             return newResearcherDetailedArray;
         }
 
