@@ -23,8 +23,8 @@ namespace ResearcherRAP_Project
         public ResearcherType type;
         public ResearcherLevel? level;
 
-        public string nameGiven;
-        public string nameFamily;
+        public string nameGiven { get; set; }
+        public string nameFamily { get; set; }
         public string title { get; set; }
         public int researcherID;
 

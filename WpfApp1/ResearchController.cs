@@ -15,7 +15,7 @@ namespace ResearcherRAP_Project
         public static int researcherID;
 
         public static List<ResearcherBrief> researcherDetailsBriefCache;
-        public static ObservableCollection<ResearcherBrief> researcherDetailsBriefTemp;
+        public static ObservableCollection<ResearcherBrief> researcherDetailsBriefTemp { get; set; }
 
         public static void applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
@@ -23,7 +23,8 @@ namespace ResearcherRAP_Project
             if (!string.IsNullOrEmpty(filterName))
             {
                 System.Text.RegularExpressions.Regex searchTerm = new System.Text.RegularExpressions.Regex(filterName);
-                filteredList = (List<ResearcherBrief>)(from entry in listCache where (entry.nameGiven.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) || entry.nameFamily.Contains(filterName, StringComparison.CurrentCultureIgnoreCase)) select entry);
+                filteredList = (from entry in listCache where entry.nameGiven.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) 
+                || entry.nameFamily.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) select entry).ToList<ResearcherBrief>();
             }
              researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(filteredList);
         }

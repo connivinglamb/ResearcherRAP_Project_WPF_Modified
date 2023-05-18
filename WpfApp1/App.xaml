@@ -4,10 +4,6 @@
              xmlns:local="clr-namespace:ResearcherRAP_Project"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:ResearcherBriefController x:Key="ResearcherBriefInstance"/>
-        <ObjectDataProvider x:Key="ResearcherBriefList"
-            ObjectInstance ="{StaticResource ResearcherBriefInstance}"
-            MethodName="getResearcherBriefTemp">
-        </ObjectDataProvider>
+       
     </Application.Resources>
 </Application>
