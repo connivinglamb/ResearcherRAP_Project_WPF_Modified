@@ -8,7 +8,7 @@ namespace ResearcherRAP_Project
     {
         static void MainTemp(string[] args) // renamed as main is called later in the application document for the WPF instantiation
         {
-            ObservableCollection<PublicationBrief> testMe = DBAdapter.publicationBriefQuery();
+           /* ObservableCollection<PublicationBrief> testMe = DBAdapter.publicationBriefQuery();
             Console.WriteLine("test\n");
             int i = 0; // 0 initialized for publication increment
 
@@ -30,7 +30,7 @@ namespace ResearcherRAP_Project
             foreach (PublicationBrief x in query1) // -- x in this case refers to the publication object/element reference.
             {
                 Console.WriteLine(x.publicationName + " " + x.publicationYear);
-            }
+            }*/
 
             //To Pause Console Readout for testing
             Console.ReadLine();

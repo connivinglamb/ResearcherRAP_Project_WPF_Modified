@@ -125,12 +125,14 @@ namespace ResearcherRAP_Project
     public class PublicationBrief //formerly cumulative
     {
         public string publicationName;
-        public string publicationYear;
+        public int publicationYear;
+        public string publicationDOI;
 
-        public PublicationBrief(string name, string year)
+        public PublicationBrief(string name, int year, string doi)
         {
             this.publicationName = name;
             this.publicationYear = year;
+            this.publicationDOI = doi;
         }
     }
     public class PublicationDetailed

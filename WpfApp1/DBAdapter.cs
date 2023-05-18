@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Reflection.PortableExecutable;
+using Org.BouncyCastle.Asn1.Crmf;
 
 namespace ResearcherRAP_Project
 {
@@ -70,10 +72,8 @@ namespace ResearcherRAP_Project
 
             finally
             {
-                if (dbReader != null)
-                { dbReader.Close(); }
-                if (conn != null)
-                { conn.Close(); }
+                if (dbReader != null) { dbReader.Close(); }
+                if (conn != null) { conn.Close(); }
             }
             return newResearcherBriefArray;
         }
@@ -89,10 +89,10 @@ namespace ResearcherRAP_Project
                 conn.Open();
                 Debug.WriteLine(conn);
 
-                MySqlCommand getResearcherBrief = new MySqlCommand("SELECT * FROM researcher WHERE id = @newID", conn);
-                getResearcherBrief.Parameters.Add("@newID", MySqlDbType.Int64);
-                getResearcherBrief.Parameters["@newID"].Value = researcherID;
-                dbReader = getResearcherBrief.ExecuteReader();
+                MySqlCommand getResearcherDetails = new MySqlCommand("SELECT * FROM researcher WHERE id = @newID", conn);
+                getResearcherDetails.Parameters.Add("@newID", MySqlDbType.Int64);
+                getResearcherDetails.Parameters["@newID"].Value = researcherID;
+                dbReader = getResearcherDetails.ExecuteReader();
             }
 
             catch
@@ -102,34 +102,89 @@ namespace ResearcherRAP_Project
 
             finally
             {
-                if (dbReader != null)
-                { dbReader.Close(); }
-                if (conn != null)
-                { conn.Close(); }
+                if (dbReader != null) { dbReader.Close(); }
+                if (conn != null) { conn.Close(); }
             }
+            publicationBriefQuery(researcherID);
             return newResearcherDetailedArray;
         }
 
-        public static ObservableCollection<PublicationBrief> publicationBriefQuery()
-        {
-            ObservableCollection<PublicationBrief> newPublicationBriefArray = new ObservableCollection<PublicationBrief>(); //establishes publication array instantiation in memory
-            newPublicationBriefArray.Add(new PublicationBrief("computationally expensive", "1995")); // pretend if this is a SELECT * FROM Retrieval query and iteration from a FOR loop
-            newPublicationBriefArray.Add(new PublicationBrief("research1", "1993"));
-            return newPublicationBriefArray;
-        }
-
-        public static ObservableCollection<PublicationDetailed> publicationDetailedQuery(int researcherID) 
+        public static ObservableCollection<PublicationBrief> publicationBriefQuery(int researcherID) 
         { // modify int values to date objects later
 
-            ObservableCollection<PublicationDetailed> newPublicationArray = new ObservableCollection<PublicationDetailed>();
-            return newPublicationArray;
+            ObservableCollection<PublicationBrief> newPublicationBriefArray = new ObservableCollection<PublicationBrief>();
+            MySqlDataReader dbReader = null;
+            List<string> publicationDOIList = new List<string>();
+
+            try
+            {
+                GetConnection();
+                conn.Open();
+                Debug.WriteLine(conn);
+
+                MySqlCommand getResearcherPublished = new MySqlCommand("SELECT doi FROM researcher_publication WHERE researcher_id = @newID", conn);
+                getResearcherPublished.Parameters.Add("@newID", MySqlDbType.Int64);
+                getResearcherPublished.Parameters["@newID"].Value = researcherID;
+                dbReader = getResearcherPublished.ExecuteReader();
+
+                while (dbReader.Read())
+                {
+                    publicationDOIList.Add(dbReader.GetString(0));
+                }
+            }
+
+            catch
+            {
+                Debug.WriteLine("Exception Thrown!");
+            }
+
+            finally
+            {
+                //if (dbReader != null) { dbReader.Close(); }
+                if (conn != null) { conn.Close(); }
+            }
+
+            try
+            {
+                foreach (string DOI in publicationDOIList)
+                {
+                    GetConnection();
+                    conn.Open();
+                    MySqlCommand getPublicationBrief = new MySqlCommand("SELECT doi, title, year FROM publication WHERE doi = @newDOI", conn);
+                    getPublicationBrief.Parameters.Add("@newDOI", MySqlDbType.VarChar);
+                    getPublicationBrief.Parameters["@newDOI"].Value = DOI;
+                    dbReader = getPublicationBrief.ExecuteReader();
+
+                    while (dbReader.Read())
+                    {
+                        string publicationTitle = dbReader.GetString(1);
+                        int publicationYear = dbReader.GetInt32(2);
+                        string publicationDOI = dbReader.GetString(0);
+
+                        newPublicationBriefArray.Add(new PublicationBrief(publicationTitle, publicationYear, publicationDOI));
+                    }
+                    if(conn != null) { conn.Close(); }
+                } 
+            }
+
+            catch
+            {
+                Debug.WriteLine("Exception Thrown!");
+            }
+
+            finally
+            {
+                if (dbReader != null) { dbReader.Close(); }
+                if (conn != null) { conn.Close(); }
+            }
+            return newPublicationBriefArray;
         }
 
-        public static ObservableCollection<PublicationBrief> publicationBriefQeuery(int researcherID)
+        public static ObservableCollection<PublicationDetailed> publicationDetailedQeuery(int researcherID)
         {
-            ObservableCollection<PublicationBrief> newPublicationBriefArray = new ObservableCollection<PublicationBrief>();
+            ObservableCollection<PublicationDetailed> newPublicationDetailsArray = new ObservableCollection<PublicationDetailed>();
 
-            return newPublicationBriefArray;
+            return newPublicationDetailsArray;
         }
 
         public static ObservableCollection<ResearcherSupervision> supervisionsQuery(int researcherID)
