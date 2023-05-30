@@ -36,7 +36,7 @@ namespace ResearcherRAP_Project
 
         private void LoadResearcherDetails(object sender, SelectionChangedEventArgs e)
         {
-            if (e.RemovedItems.Count > 0)
+            if (e.AddedItems.Count > 0)
             {
                 string pulledResearcher = e.AddedItems[0].ToString();
                 GlobalVariables.GlobalResearcherID = int.Parse(pulledResearcher.Substring(pulledResearcher.Length - 6));

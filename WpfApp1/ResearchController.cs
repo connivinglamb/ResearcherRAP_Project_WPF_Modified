@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -26,7 +27,12 @@ namespace ResearcherRAP_Project
                 filteredList = (from entry in listCache where entry.nameGiven.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) 
                 || entry.nameFamily.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) select entry).ToList<ResearcherBrief>();
             }
-             researcherDetailsBriefTemp = new ObservableCollection<ResearcherBrief>(filteredList);
+            researcherDetailsBriefTemp.Clear();
+            foreach(ResearcherBrief entry in filteredList)
+            {
+                researcherDetailsBriefTemp.Add(entry);
+            }
+            
         }
         public static List<ResearcherBrief> populateCache(List<ResearcherBrief> ListCache)
         {
