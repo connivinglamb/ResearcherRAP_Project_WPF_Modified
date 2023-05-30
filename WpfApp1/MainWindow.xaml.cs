@@ -48,7 +48,56 @@ namespace ResearcherRAP_Project
 
         private void listFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ResearcherBriefController.applyFilters(ResearcherBriefController.researcherDetailsBriefCache, 0, listFilter.Text);
+            ResearcherBriefController.filterName = listFilter.Text;
+            ResearcherBriefController.applyFilters(ResearcherBriefController.researcherDetailsBriefCache, ResearcherBriefController.filterRange, ResearcherBriefController.filterName);
+        }
+
+        private void EmploymentLevelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string employmentLevel = e.AddedItems[0].ToString().Remove(0, 38);
+
+            if (e.AddedItems[0] != null)
+            {
+                if (employmentLevel.StartsWith("A"))
+                {
+                    ResearcherBriefController.filterRange = 0;
+                }
+                else if (employmentLevel.StartsWith("S"))
+                {
+                    if (employmentLevel.Equals("Students Only"))
+                    {
+                        ResearcherBriefController.filterRange = 1;
+                    } else
+                    {
+                        ResearcherBriefController.filterRange = 2;
+                    }    
+                } else if (employmentLevel.StartsWith("Level"))
+                {
+                    switch (employmentLevel[6])
+                    {
+                        default:
+                            ResearcherBriefController.filterRange = 0;
+                            break;
+                        case 'A':
+                            ResearcherBriefController.filterRange = 3;
+                            break;
+                        case 'B':
+                            ResearcherBriefController.filterRange = 4;
+                            break;
+                        case 'C':
+                            ResearcherBriefController.filterRange = 5;
+                            break;
+                        case 'D':
+                            ResearcherBriefController.filterRange = 6;
+                            break;
+                        case 'E':
+                            ResearcherBriefController.filterRange = 7;
+                            break;
+                    }
+                }
+
+                ResearcherBriefController.applyFilters(ResearcherBriefController.researcherDetailsBriefCache, ResearcherBriefController.filterRange, ResearcherBriefController.filterName);
+            }
         }
     }
 }

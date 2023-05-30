@@ -25,23 +25,31 @@
     </Window.Resources>
     <Grid Margin="0,2">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*" />
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="101*" />
+            <ColumnDefinition Width="139*"/>
+            <ColumnDefinition Width="160*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
-        <Button HorizontalContentAlignment="Stretch" Click="OnClick" Grid.ColumnSpan="2" Margin="6,0,314,0">FilterCommand</Button>
+        <ComboBox x:Name="EmploymentLevelComboBox" SelectionChanged="EmploymentLevelComboBox_SelectionChanged" Margin="5,10,5,130">
+            <ComboBoxItem>All</ComboBoxItem>
+            <ComboBoxItem>Students Only</ComboBoxItem>
+            <ComboBoxItem>Staff Only</ComboBoxItem>
+            <ComboBoxItem>Level A (Research Associate)</ComboBoxItem>
+            <ComboBoxItem>Level B (Lecturer)</ComboBoxItem>
+            <ComboBoxItem>Level C (Assistant Professor)</ComboBoxItem>
+            <ComboBoxItem>Level D (Associate Professor)</ComboBoxItem>
+            <ComboBoxItem>Level E (Professor)</ComboBoxItem>
+        </ComboBox>
         <Button Grid.Column="1">TestButton2</Button>
 
-        <ListBox Name="researcherList"
-                 Grid.Column="2" SelectedIndex="0" Margin="0,1,0,0" SelectionChanged="LoadResearcherDetails"
+        <ListBox Name="researcherList" Margin="0,5,0,10" SelectionChanged="LoadResearcherDetails"
                  ItemsSource="{Binding Source={StaticResource ResearcherBriefList}}"
-                 ItemTemplate="{StaticResource ResearcherListTemplate}"></ListBox>
+                 ItemTemplate="{StaticResource ResearcherListTemplate}" Grid.Row="1"/>
 
-        <TextBox Name="listFilter" Margin="0,170,0,0" Grid.RowSpan="2" TextChanged="listFilter_TextChanged" />
+        <TextBox Name="listFilter" Margin="0,57,0,86" TextChanged="listFilter_TextChanged" />
     </Grid>
 </Window>

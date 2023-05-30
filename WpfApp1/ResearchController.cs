@@ -21,12 +21,42 @@ namespace ResearcherRAP_Project
         public static void applyFilters(List<ResearcherBrief> listCache, int filterRange, string filterName)
         {
             List<ResearcherBrief> filteredList = listCache;
+
+            switch (filterRange)
+            {
+                default:
+                    break;
+                case 1:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Student select entry).ToList<ResearcherBrief>();
+                    break;
+                case 2:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Staff select entry).ToList<ResearcherBrief>();
+                    break;
+                case 3:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Staff && entry.level == ResearcherLevel.A select entry).ToList<ResearcherBrief>();
+                    break;
+                case 4:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Staff && entry.level == ResearcherLevel.B select entry).ToList<ResearcherBrief>();
+                    break;
+                case 5:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Staff && entry.level == ResearcherLevel.C select entry).ToList<ResearcherBrief>();
+                    break;
+                case 6:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Staff && entry.level == ResearcherLevel.D select entry).ToList<ResearcherBrief>();
+                    break;
+                case 7:
+                    filteredList = (from entry in filteredList where entry.type == ResearcherType.Staff && entry.level == ResearcherLevel.E select entry).ToList<ResearcherBrief>();
+                    break;
+
+            }
+
             if (!string.IsNullOrEmpty(filterName))
             {
-                System.Text.RegularExpressions.Regex searchTerm = new System.Text.RegularExpressions.Regex(filterName);
-                filteredList = (from entry in listCache where entry.nameGiven.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) 
+                System.Text.RegularExpressions.Regex searchTerm = new System.Text.RegularExpressions.Regex(System.Text.RegularExpressions.Regex.Replace(filterName, @"[^0-9a-zA-Z]+", ""));
+                filteredList = (from entry in filteredList where entry.nameGiven.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) 
                 || entry.nameFamily.Contains(filterName, StringComparison.CurrentCultureIgnoreCase) select entry).ToList<ResearcherBrief>();
             }
+
             researcherDetailsBriefTemp.Clear();
             foreach(ResearcherBrief entry in filteredList)
             {
