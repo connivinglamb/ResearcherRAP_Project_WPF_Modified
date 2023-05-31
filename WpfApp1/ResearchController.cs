@@ -115,7 +115,7 @@ namespace ResearcherRAP_Project
     }
     class ResearcherDetailsController
     {
-        public static ObservableCollection<ResearcherDetailed> ResearcherDetailsCache { get; set; }
+        public static ResearcherDetailed ResearcherDetailsCache { get; set; }
         public void loadResearcherDetails(int researcherID)
         {
             
@@ -135,7 +135,7 @@ namespace ResearcherRAP_Project
             
         }
 
-        public static ObservableCollection<ResearcherDetailed> GetResearcherDetails()
+        public static ResearcherDetailed GetResearcherDetails()
         {
             return ResearcherDetailsCache;
         }

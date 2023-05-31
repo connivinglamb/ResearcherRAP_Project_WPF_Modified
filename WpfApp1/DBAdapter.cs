@@ -78,9 +78,8 @@ namespace ResearcherRAP_Project
             return newResearcherBriefArray;
         }
 
-        public static ObservableCollection<ResearcherDetailed> researcherDetailedQuery(int researcherID) 
+        public static void researcherDetailedQuery(int researcherID) 
         {
-            ObservableCollection<ResearcherDetailed> newResearcherDetailedArray = new ObservableCollection<ResearcherDetailed>();
             MySqlDataReader dbReader = null;
 
             try
@@ -93,6 +92,44 @@ namespace ResearcherRAP_Project
                 getResearcherDetails.Parameters.Add("@newID", MySqlDbType.Int64);
                 getResearcherDetails.Parameters["@newID"].Value = researcherID;
                 dbReader = getResearcherDetails.ExecuteReader();
+
+                string nameGiven = dbReader.GetString(2);
+                string nameFamily = dbReader.GetString(3);
+                string title = dbReader.GetString(4);
+                string schoolOrUnit = dbReader.GetString(5);
+                string email = dbReader.GetString(7);
+                string photo = dbReader.GetString(8);
+                string currentJobTitle;
+                switch(dbReader.GetString(11))
+                {
+                    case null:
+                        currentJobTitle = "Student";
+                        break;
+                    case "A":
+                        currentJobTitle = "Research Associate";
+                        break;
+                    case "B":
+                        currentJobTitle = "Lecturer";
+                        break;
+                    case "C":
+                        currentJobTitle = "Assistant Professor";
+                        break;
+                    case "D":
+                        currentJobTitle = "Associate Professor";
+                        break;
+                    case "E":
+                        currentJobTitle = "Professor";
+                        break;
+                }
+
+                int ID = dbReader.GetInt32(0);
+
+                string degree = null;
+                if (!String.IsNullOrEmpty(dbReader.GetString(9))
+                {
+                    degree = dbReader.GetString(9);
+                }
+                //return newResearcherDetailed;
             }
 
             catch
@@ -105,8 +142,8 @@ namespace ResearcherRAP_Project
                 if (dbReader != null) { dbReader.Close(); }
                 if (conn != null) { conn.Close(); }
             }
-            publicationBriefQuery(researcherID);
-            return newResearcherDetailedArray;
+
+
         }
 
         public static ObservableCollection<PublicationBrief> publicationBriefQuery(int researcherID) 
