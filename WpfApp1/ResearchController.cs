@@ -115,11 +115,12 @@ namespace ResearcherRAP_Project
     }
     class ResearcherDetailsController
     {
+        public static ObservableCollection<ResearcherDetailed> ResearcherDetailsCache { get; set; }
         public void loadResearcherDetails(int researcherID)
         {
             
         }
-        public void userViewsPublications(int researcherID, int publicaitonID)
+        public void userViewsPublications(int researcherID, int publicationID)
         {
             
         }
@@ -132,6 +133,11 @@ namespace ResearcherRAP_Project
         public void userExpandsSupervisions(int researcherID)
         {
             
+        }
+
+        public static ObservableCollection<ResearcherDetailed> GetResearcherDetails()
+        {
+            return ResearcherDetailsCache;
         }
     }
 

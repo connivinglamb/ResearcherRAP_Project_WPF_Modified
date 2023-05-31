@@ -8,10 +8,16 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <local:ResearcherBriefController x:Key="ResearcherBriefInstance"/>
+        <local:ResearcherDetailsController x:Key="ResearcherDetailsInstance" />
         <ObjectDataProvider x:Key="ResearcherBriefList"
             ObjectInstance ="{StaticResource ResearcherBriefInstance}"
             MethodName="getResearcherBriefTemp">
         </ObjectDataProvider>
+        <ObjectDataProvider x:Key="ResearcherDetails"
+                            ObjectInstance="{StaticResource ResearcherDetailsInstance}"
+                            MethodName="get"
+
+
         <DataTemplate x:Key = "ResearcherListTemplate">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Path=nameFamily}" />
@@ -21,6 +27,35 @@
                 <TextBlock Text="{Binding Path=title}" />
                 <TextBlock Text=")"/>
             </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ResearcherDetailsTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Name:" />
+                <TextBlock Grid.Row="0" Grid.Column="1">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}}{0} {1}">
+                            <Binding Path="nameGiven"></Binding>
+                            <Binding Path="nameFamily"></Binding>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <Label Grid.Row="1" Grid.Column="0" Content="Title:" />
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=title}" />
+                <Label Grid.Row="2" Grid.Column="0" Content="Unit:" />
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=schoolOrUnit}" />
+            </Grid>
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="0,2">
@@ -44,12 +79,15 @@
             <ComboBoxItem>Level D (Associate Professor)</ComboBoxItem>
             <ComboBoxItem>Level E (Professor)</ComboBoxItem>
         </ComboBox>
-        <Button Grid.Column="1">TestButton2</Button>
+
 
         <ListBox Name="researcherList" Margin="0,5,0,10" SelectionChanged="LoadResearcherDetails"
                  ItemsSource="{Binding Source={StaticResource ResearcherBriefList}}"
                  ItemTemplate="{StaticResource ResearcherListTemplate}" Grid.Row="1"/>
 
         <TextBox Name="listFilter" Margin="0,57,0,86" TextChanged="listFilter_TextChanged" />
+
+        <ListBox x:Name="ResearcherDetailsView"
+                 ItemTemplate="{StaticResource ResearcherDetailsTemplate}" Grid.Column="1" Margin="5,0,71,0" />
     </Grid>
 </Window>
