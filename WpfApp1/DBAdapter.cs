@@ -156,7 +156,7 @@ namespace ResearcherRAP_Project
                     level = (ResearcherLevel?)ParseEnum<ResearcherLevel>(dbReader.GetString(11));
                 }
 
-                ResearcherDetailed.CampusType campus = ParseEnum<ResearcherDetailed.CampusType>(dbReader.GetString(6));
+                ResearcherDetailed.CampusType campus = ParseEnum<ResearcherDetailed.CampusType>(dbReader.GetString(6).Replace(' ', '_'));
 
                 newResearcherDetailed = new ResearcherDetailed(type, campus, level, ID, nameGiven, nameFamily, title, schoolOrUnit, email, photo, currentJobTitle, degree, supervisor, commencedWithInstitution, commencedCurrentPosition);
                 
