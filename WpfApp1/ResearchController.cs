@@ -116,11 +116,11 @@ namespace ResearcherRAP_Project
     class ResearcherDetailsController
     {
         public static ResearcherDetailed ResearcherDetailsCache { get; set; }
-        public void loadResearcherDetails(int researcherID)
+        public static void loadResearcherDetails(int researcherID)
         {
-            
+            ResearcherDetailsCache = DBAdapter.researcherDetailedQuery(researcherID);
         }
-        public void userViewsPublications(int researcherID, int publicationID)
+        public static void userViewsPublications(int researcherID, int publicationID)
         {
             
         }
@@ -141,18 +141,16 @@ namespace ResearcherRAP_Project
         }
     }
 
-    class PublicationsController
+    public static class PublicationsController
     {
-        public Boolean publicationsInverted;
-        public DateTime publicationsYearMin;
-        public DateTime publicationsYearMax;
 
-        public void loadPublications(int researcherID)
+
+        public static ObservableCollection<PublicationBrief> loadPublications(int researcherID)
         {
-                
+            return new ObservableCollection<PublicationBrief>();
         }
 
-        public void publicationsFilter(int yearMin, int yearMax)
+        public static void publicationsFilter(int yearMin, int yearMax)
         {
             //convert userinput to DateTime format
             DateTime newYearMin = DateTime.Parse(yearMin.ToString());

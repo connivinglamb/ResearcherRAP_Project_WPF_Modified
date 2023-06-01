@@ -13,11 +13,6 @@
             ObjectInstance ="{StaticResource ResearcherBriefInstance}"
             MethodName="getResearcherBriefTemp">
         </ObjectDataProvider>
-        <ObjectDataProvider x:Key="ResearcherDetails"
-                            ObjectInstance="{StaticResource ResearcherDetailsInstance}"
-                            MethodName="get">
-</ObjectDataProvider>
-
 
         <DataTemplate x:Key = "ResearcherListTemplate">
             <StackPanel Orientation="Horizontal">
@@ -88,7 +83,12 @@
 
         <TextBox Name="listFilter" Margin="0,57,0,86" TextChanged="listFilter_TextChanged" />
 
-        <ListBox x:Name="ResearcherDetailsView"
-                 ItemTemplate="{StaticResource ResearcherDetailsTemplate}" Grid.Column="1" Margin="5,0,71,0" />
+        <StackPanel x:Name="ResearcherDetailsView" Grid.Column="1" Margin="5,0,0,10" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Name:" />
+                <Label Content="{Binding Path=nameGiven}"/>
+                <Label Content="{Binding Path=nameFamily}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

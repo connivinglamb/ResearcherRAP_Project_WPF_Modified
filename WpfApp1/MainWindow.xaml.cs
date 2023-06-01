@@ -40,7 +40,8 @@ namespace ResearcherRAP_Project
             {
                 string pulledResearcher = e.AddedItems[0].ToString();
                 GlobalVariables.GlobalResearcherID = int.Parse(pulledResearcher.Substring(pulledResearcher.Length - 6));
-                /*ResearcherDetailsController.ResearcherDetailsCache = */DBAdapter.researcherDetailedQuery(GlobalVariables.GlobalResearcherID);
+                ResearcherDetailsController.loadResearcherDetails(GlobalVariables.GlobalResearcherID);
+                ResearcherDetailsView.DataContext = ResearcherDetailsController.GetResearcherDetails();
                 //MessageBox.Show(GlobalVariables.GlobalResearcherID.ToString());
 
             }

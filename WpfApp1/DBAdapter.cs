@@ -78,9 +78,10 @@ namespace ResearcherRAP_Project
             return newResearcherBriefArray;
         }
 
-        public static void researcherDetailedQuery(int researcherID) 
+        public static ResearcherDetailed researcherDetailedQuery(int researcherID) 
         {
             MySqlDataReader dbReader = null;
+            ResearcherDetailed newResearcherDetailed = null;
 
             try
             {
@@ -93,14 +94,16 @@ namespace ResearcherRAP_Project
                 getResearcherDetails.Parameters["@newID"].Value = researcherID;
                 dbReader = getResearcherDetails.ExecuteReader();
 
+                dbReader.Read();
+
                 string nameGiven = dbReader.GetString(2);
                 string nameFamily = dbReader.GetString(3);
                 string title = dbReader.GetString(4);
                 string schoolOrUnit = dbReader.GetString(5);
                 string email = dbReader.GetString(7);
                 string photo = dbReader.GetString(8);
-                string currentJobTitle;
-                switch(dbReader.GetString(11))
+                string currentJobTitle = "Student";
+                switch (dbReader.GetString(11))
                 {
                     case null:
                         currentJobTitle = "Student";
@@ -124,12 +127,38 @@ namespace ResearcherRAP_Project
 
                 int ID = dbReader.GetInt32(0);
 
-                string degree = null;
-                if (!String.IsNullOrEmpty(dbReader.GetString(9))
+                string? degree = null;
+                if (!dbReader.IsDBNull(9))
                 {
                     degree = dbReader.GetString(9);
                 }
-                //return newResearcherDetailed;
+
+                int? supervisor = null;
+                if (!dbReader.IsDBNull(10))
+                {
+                    supervisor = dbReader.GetInt32(10);
+                }
+
+                DateTime commencedWithInstitution= dbReader.GetDateTime(12);
+
+                DateTime commencedCurrentPosition= dbReader.GetDateTime(13);
+
+                ResearcherType type = ParseEnum<ResearcherType>(dbReader.GetString(1));
+
+                ResearcherLevel? level;
+                if (dbReader.IsDBNull(11))
+                {
+                    level = null;
+                }
+                else
+                {
+                    level = (ResearcherLevel?)ParseEnum<ResearcherLevel>(dbReader.GetString(11));
+                }
+
+                ResearcherDetailed.CampusType campus = ParseEnum<ResearcherDetailed.CampusType>(dbReader.GetString(6));
+
+                newResearcherDetailed = new ResearcherDetailed(type, campus, level, ID, nameGiven, nameFamily, title, schoolOrUnit, email, photo, currentJobTitle, degree, supervisor, commencedWithInstitution, commencedCurrentPosition);
+                
             }
 
             catch
@@ -143,7 +172,7 @@ namespace ResearcherRAP_Project
                 if (conn != null) { conn.Close(); }
             }
 
-
+            return newResearcherDetailed;
         }
 
         public static ObservableCollection<PublicationBrief> publicationBriefQuery(int researcherID) 
@@ -187,7 +216,7 @@ namespace ResearcherRAP_Project
                 {
                     GetConnection();
                     conn.Open();
-                    MySqlCommand getPublicationBrief = new MySqlCommand("SELECT doi, title, year FROM publication WHERE doi = @newDOI", conn);
+                    MySqlCommand getPublicationBrief = new MySqlCommand("SELECT doi, title, year, ranking FROM publication WHERE doi = @newDOI", conn);
                     getPublicationBrief.Parameters.Add("@newDOI", MySqlDbType.VarChar);
                     getPublicationBrief.Parameters["@newDOI"].Value = DOI;
                     dbReader = getPublicationBrief.ExecuteReader();
@@ -197,8 +226,10 @@ namespace ResearcherRAP_Project
                         string publicationTitle = dbReader.GetString(1);
                         int publicationYear = dbReader.GetInt32(2);
                         string publicationDOI = dbReader.GetString(0);
+                        string publicationRanking = dbReader.GetString(3);
 
-                        newPublicationBriefArray.Add(new PublicationBrief(publicationTitle, publicationYear, publicationDOI));
+
+                        newPublicationBriefArray.Add(new PublicationBrief(publicationTitle, publicationYear, publicationDOI, publicationRanking));
                     }
                     if(conn != null) { conn.Close(); }
                 } 

@@ -49,35 +49,37 @@ namespace ResearcherRAP_Project
         
         public enum CampusType { Hobart, Launceston, Cradle_Coast };
         
-        public ResearcherType type;
-        public CampusType campus;
-        public ResearcherLevel level;
+        public ResearcherType type { get; set; }
+        public CampusType campus { get; set; }
+        public ResearcherLevel? level { get; set; }
 
-        public int researcherID;
-        public string nameGiven;
-        public string nameFamily;
-        public string title;
-        public string schoolOrUnit;
-        public string email;
-        public string photo;
-        public string currentJobTitle;
-        public int publicationCount;
-        public int q1Percentage;
+        public int researcherID { get; set; }
+        public string nameGiven { get; set; }
+        public string nameFamily { get; set; }
+        public string title { get; set; }
+        public string schoolOrUnit { get; set; }
+        public string email { get; set; }
+        public string photo { get; set; }
+        public string currentJobTitle { get; set; }
+        public int publicationCount { get; set; }
+        public double q1Percentage { get; set; }
 
-        public string? degree; //students only (Nullable)
-        public string? supervisor; //students only (Nullable)
+        public string? degree { get; set; } //students only (Nullable)
+        public int? supervisor { get; set; } //students only (Nullable)
 
-        public ObservableCollection<ResearcherDetailed>? supervisions; //staff only (Nullable)
-        public float? threeYearAverage; //staff only (Nullable)
-        public float? fundingReceived; //staff only (Nullable)
-        public float? performancebyPublication; //staff only (Nullable)
-        public float? performancebyFunding; //staff only (Nullable)
+        public ObservableCollection<ResearcherDetailed>? supervisions { get; set; } //staff only (Nullable)
+        public double? threeYearAverage { get; set; } //staff only (Nullable)
+        public double? fundingReceived { get; set; } //staff only (Nullable)
+        public double? performancebyPublication { get; set; } //staff only (Nullable)
+        public double? performancebyFunding { get; set; } //staff only (Nullable)
 
-        public DateTime commencedWithInstitution;
-        public DateTime commencedCurrentPosition;
-        public DateTime tenure;
+        public DateTime commencedWithInstitution { get; set; }
+        public DateTime commencedCurrentPosition { get; set; }
+        public double tenure { get; set; }
 
-        public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, int publicationCount, int q1Percentage, string? degree, string? supervisor, float? threeYearAverage, float? fundingReceived, float? performancebyPublication, float? performancebyFunding, DateTime commencedWithInstitution, DateTime commencedCurrentPosition, DateTime tenure, ObservableCollection<PublicationBrief> publicationsCache, ObservableCollection<PublicationBrief> publicationsTemp)
+        public ObservableCollection<PublicationBrief> hasPublications;
+
+        public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel? level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, string? degree, int? supervisor, DateTime commencedWithInstitution, DateTime commencedCurrentPosition)
         {
             this.type = type;
             this.campus = campus;
@@ -90,19 +92,43 @@ namespace ResearcherRAP_Project
             this.email = email;
             this.photo = photo;
             this.currentJobTitle = currentJobTitle;
-            this.publicationCount = publicationCount;
-            this.q1Percentage = q1Percentage;
+            //this.publicationCount = publicationCount;
+            //this.q1Percentage = q1Percentage;
             this.degree = degree;
             this.supervisor = supervisor;
 
-            this.threeYearAverage = threeYearAverage; //more work needs to be done here for null values in constructor
-            this.fundingReceived = fundingReceived;
-            this.performancebyPublication = performancebyPublication;
-            this.performancebyFunding = performancebyFunding;
+            //this.threeYearAverage = threeYearAverage; //more work needs to be done here for null values in constructor
+            //this.fundingReceived = fundingReceived;
+            //this.performancebyPublication = performancebyPublication;
+            //this.performancebyFunding = performancebyFunding;
 
             this.commencedWithInstitution = commencedWithInstitution;
             this.commencedCurrentPosition = commencedCurrentPosition;
-            this.tenure = tenure;
+            tenure = DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425;
+
+            hasPublications = PublicationsController.loadPublications(researcherID);
+            publicationCount = hasPublications.Count;
+
+            double rankingCount = 0;
+            double threeYearCount = 0;
+            foreach (var publication in hasPublications)
+            {
+                if (publication.publicationRanking.Equals("Q1"))
+                {
+                    rankingCount++;
+                }
+
+                if (publication.publicationYear < DateTime.Now.Year && publication.publicationYear > (DateTime.Now.Year - 4))
+                {
+                    threeYearCount++;
+                }
+            }
+            q1Percentage = rankingCount / publicationCount * 100;
+            threeYearAverage = threeYearCount / 3;
+            fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
+            performancebyPublication = (publicationCount / Math.Round(tenure));
+            performancebyFunding = (fundingReceived / Math.Round(tenure));
+
         }
     }
     public class ResearcherDetailsBrief //used on interactiv history for staff researchers for positions held
@@ -127,12 +153,14 @@ namespace ResearcherRAP_Project
         public string publicationName;
         public int publicationYear;
         public string publicationDOI;
+        public string publicationRanking;
 
-        public PublicationBrief(string name, int year, string doi)
+        public PublicationBrief(string name, int year, string doi, string ranking)
         {
             this.publicationName = name;
             this.publicationYear = year;
             this.publicationDOI = doi;
+            this.publicationRanking = ranking;
         }
     }
     public class PublicationDetailed
