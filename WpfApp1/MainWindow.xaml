@@ -13,6 +13,11 @@
             ObjectInstance ="{StaticResource ResearcherBriefInstance}"
             MethodName="getResearcherBriefTemp">
         </ObjectDataProvider>
+        <ObjectDataProvider x:Key="ResearcherDetails"
+                            ObjectInstance="{StaticResource ResearcherDetailsInstance}"
+                            MethodName="GetResearcherDetails">
+        </ObjectDataProvider>
+
 
         <DataTemplate x:Key = "ResearcherListTemplate">
             <StackPanel Orientation="Horizontal">
@@ -89,6 +94,10 @@
                 <Label Content="{Binding Path=nameGiven}"/>
                 <Label Content="{Binding Path=nameFamily}"/>
             </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="PublicationListView" Margin="0,26,36,47" Grid.Column="2" Grid.RowSpan="2">
+            <ListBox ItemsSource="{Binding hasPublications}" Height="249"/>
         </StackPanel>
     </Grid>
 </Window>

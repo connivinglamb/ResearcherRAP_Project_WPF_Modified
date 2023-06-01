@@ -42,6 +42,7 @@ namespace ResearcherRAP_Project
                 GlobalVariables.GlobalResearcherID = int.Parse(pulledResearcher.Substring(pulledResearcher.Length - 6));
                 ResearcherDetailsController.loadResearcherDetails(GlobalVariables.GlobalResearcherID);
                 ResearcherDetailsView.DataContext = ResearcherDetailsController.GetResearcherDetails();
+                PublicationListView.DataContext = ResearcherDetailsController.GetResearcherDetails();
                 //MessageBox.Show(GlobalVariables.GlobalResearcherID.ToString());
 
             }

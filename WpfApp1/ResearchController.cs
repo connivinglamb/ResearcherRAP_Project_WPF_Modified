@@ -143,21 +143,11 @@ namespace ResearcherRAP_Project
 
     public static class PublicationsController
     {
-
-
         public static ObservableCollection<PublicationBrief> loadPublications(int researcherID)
         {
             return DBAdapter.publicationBriefQuery(researcherID);
         }
 
-        public static void publicationsFilter(int yearMin, int yearMax)
-        {
-            //convert userinput to DateTime format
-            DateTime newYearMin = DateTime.Parse(yearMin.ToString());
-            DateTime newYearMax = DateTime.Parse(yearMax.ToString());
-
-
-        }
     }
 
     class PublicationDetailsController

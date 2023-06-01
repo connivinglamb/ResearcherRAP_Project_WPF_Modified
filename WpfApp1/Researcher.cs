@@ -78,7 +78,7 @@ namespace ResearcherRAP_Project
         public DateTime commencedCurrentPosition { get; set; }
         public double tenure { get; set; }
 
-        public ObservableCollection<PublicationBrief> hasPublications;
+        public ObservableCollection<PublicationBrief> hasPublications { get; set; }
 
         public ResearcherDetailed(ResearcherType type, CampusType campus, ResearcherLevel? level, int researcherID, string nameGiven, string nameFamily, string title, string schoolOrUnit, string email, string photo, string currentJobTitle, string? degree, int? supervisor, DateTime commencedWithInstitution, DateTime commencedCurrentPosition)
         {
@@ -171,6 +171,11 @@ namespace ResearcherRAP_Project
             this.publicationYear = year;
             this.publicationDOI = doi;
             this.publicationRanking = ranking;
+        }
+
+        public override string ToString()
+        {
+            return publicationName + publicationYear + publicationDOI + publicationRanking;
         }
     }
     public class PublicationDetailed
