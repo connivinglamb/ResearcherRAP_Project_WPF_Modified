@@ -162,7 +162,7 @@ namespace ResearcherRAP_Project
 
                 newResearcherDetailed = new ResearcherDetailed(type, campus, level, ID, nameGiven, nameFamily, title, schoolOrUnit, email, photo, currentJobTitle, degree, supervisor, commencedWithInstitution, commencedCurrentPosition);
                 
-            }
+            }   
 
             catch
             {

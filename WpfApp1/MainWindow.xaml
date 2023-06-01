@@ -91,8 +91,37 @@
         <StackPanel x:Name="ResearcherDetailsView" Grid.Column="1" Margin="5,0,0,10" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Name:" />
+                <Label Content="{Binding Path=title}"/>
                 <Label Content="{Binding Path=nameGiven}"/>
                 <Label Content="{Binding Path=nameFamily}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="ID: "/>
+                <Label Content="{Binding Path=researcherID}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="School/Unit: "/>
+                <Label Content="{Binding Path=schoolorUnit}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Job Title: "/>
+                <Label Content="{Binding Path=currentJobTitle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Campus: "/>
+                <Label Content="{Binding Path=campus}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Email: "/>
+                <Label Content="{Binding Path=email}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Degree: "/>
+                <Label Content="{Binding Path=degree}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Supervisor: "/>
+                <Label Content="{Binding Path=supervisor}"/>
             </StackPanel>
         </StackPanel>
 
