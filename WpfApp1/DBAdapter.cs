@@ -126,7 +126,7 @@ namespace ResearcherRAP_Project
                 }
                 
 
-                int ID = dbReader.GetInt32(0);
+                    int ID = dbReader.GetInt32(0);
 
                 string? degree = null;
                 if (!dbReader.IsDBNull(9))
@@ -173,6 +173,8 @@ namespace ResearcherRAP_Project
                 if (conn != null) { conn.Close(); }
             }
 
+            publicationBriefQuery(researcherID);
+
             return newResearcherDetailed;
         }
 
@@ -215,7 +217,6 @@ namespace ResearcherRAP_Project
             {
                 foreach (string DOI in publicationDOIList)
                 {
-                    GetConnection();
                     conn.Open();
                     MySqlCommand getPublicationBrief = new MySqlCommand("SELECT doi, title, year, ranking FROM publication WHERE doi = @newDOI", conn);
                     getPublicationBrief.Parameters.Add("@newDOI", MySqlDbType.VarChar);
@@ -246,12 +247,57 @@ namespace ResearcherRAP_Project
                 if (dbReader != null) { dbReader.Close(); }
                 if (conn != null) { conn.Close(); }
             }
+
+            publicationDetailedQuery("10.1007/11839088_42");
+
             return newPublicationBriefArray;
         }
 
-        public static ObservableCollection<PublicationDetailed> publicationDetailedQeuery(int researcherID)
+        public static ObservableCollection<PublicationDetailed> publicationDetailedQuery(string publicationDOI)
         {
             ObservableCollection<PublicationDetailed> newPublicationDetailsArray = new ObservableCollection<PublicationDetailed>();
+            MySqlDataReader dbReader = null;
+
+            try
+            {
+                GetConnection();
+                conn.Open();
+                Debug.WriteLine(conn);
+
+                MySqlCommand getPublicationDetailed = new MySqlCommand("SELECT * FROM publication WHERE doi = @newDOI", conn);
+                getPublicationDetailed.Parameters.Add("@newDOI", MySqlDbType.VarChar);
+                getPublicationDetailed.Parameters["@newDOI"].Value = publicationDOI;
+                dbReader = getPublicationDetailed.ExecuteReader();
+
+                while (dbReader.Read())
+                {
+
+                    //ResearcherType researcherType = ParseEnum<ResearcherType>(dbReader.GetString(1));
+
+                    string detailsDOI = dbReader.GetString(0);
+                    string detailsTitle = dbReader.GetString(1);
+                    PublicationDetailed.PublicationRanking detailsRanking = ParseEnum<PublicationDetailed.PublicationRanking>(dbReader.GetString(2));
+                    string detailsAuthors = dbReader.GetString(3);
+                    int detailsYear = dbReader.GetInt32(4);
+                    PublicationDetailed.PublicationType detailsType = ParseEnum<PublicationDetailed.PublicationType>(dbReader.GetString(5));
+                    string detailsCite = dbReader.GetString(6);
+                    DateTime detailsAvailable = dbReader.GetDateTime(7);
+
+                    newPublicationDetailsArray.Add(new PublicationDetailed(detailsType, detailsRanking, detailsDOI, detailsTitle, detailsAuthors, detailsCite, detailsYear, detailsAvailable));
+                }
+            }
+
+            catch
+            {
+                Debug.WriteLine("Exception Thrown!");
+            }
+
+            finally
+            {
+                //if (dbReader != null) { dbReader.Close(); }
+                if (conn != null) { conn.Close(); }
+            }
+
 
             return newPublicationDetailsArray;
         }

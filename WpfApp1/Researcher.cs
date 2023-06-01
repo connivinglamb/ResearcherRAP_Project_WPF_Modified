@@ -166,13 +166,13 @@ namespace ResearcherRAP_Project
     public class PublicationDetailed
     {
         public enum PublicationType { Conference, Journal, Other };
+        public enum PublicationRanking { Q1,  Q2, Q3, Q4 };
 
         public PublicationType type;
-
+        public PublicationRanking ranking;
         public string doi;
         public string title;
         public string authors;
-        public string ranking;
         public string citeAs;
         public int age;
 
@@ -184,13 +184,13 @@ namespace ResearcherRAP_Project
             return DateTime.Now.Year - year;
         }
 
-        public PublicationDetailed(PublicationType type, string doi, string title, string authors, string ranking, string citeAs, int year, DateTime availabilityDate)
+        public PublicationDetailed(PublicationType type, PublicationRanking ranking, string doi, string title, string authors, string citeAs, int year, DateTime availabilityDate)
         {
             this.type = type;
+            this.ranking = ranking;
             this.doi = doi;
             this.title = title;
             this.authors = authors;
-            this.ranking = ranking;
             this.citeAs = citeAs;
             this.year = year;
             this.availabilityDate = availabilityDate;
