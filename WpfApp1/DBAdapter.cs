@@ -158,6 +158,8 @@ namespace ResearcherRAP_Project
 
                 ResearcherDetailed.CampusType campus = ParseEnum<ResearcherDetailed.CampusType>(dbReader.GetString(6).Replace(' ', '_'));
 
+                conn.Close();
+
                 newResearcherDetailed = new ResearcherDetailed(type, campus, level, ID, nameGiven, nameFamily, title, schoolOrUnit, email, photo, currentJobTitle, degree, supervisor, commencedWithInstitution, commencedCurrentPosition);
                 
             }
@@ -172,8 +174,6 @@ namespace ResearcherRAP_Project
                 if (dbReader != null) { dbReader.Close(); }
                 if (conn != null) { conn.Close(); }
             }
-
-            publicationBriefQuery(researcherID);
 
             return newResearcherDetailed;
         }
@@ -247,8 +247,6 @@ namespace ResearcherRAP_Project
                 if (dbReader != null) { dbReader.Close(); }
                 if (conn != null) { conn.Close(); }
             }
-
-            publicationDetailedQuery("10.1007/11839088_42");
 
             return newPublicationBriefArray;
         }

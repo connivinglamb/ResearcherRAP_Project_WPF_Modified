@@ -73,6 +73,7 @@ namespace ResearcherRAP_Project
         public double? performancebyPublication { get; set; } //staff only (Nullable)
         public double? performancebyFunding { get; set; } //staff only (Nullable)
 
+
         public DateTime commencedWithInstitution { get; set; }
         public DateTime commencedCurrentPosition { get; set; }
         public double tenure { get; set; }
@@ -124,10 +125,19 @@ namespace ResearcherRAP_Project
                 }
             }
             q1Percentage = rankingCount / publicationCount * 100;
-            threeYearAverage = threeYearCount / 3;
-            fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
-            performancebyPublication = (publicationCount / Math.Round(tenure));
-            performancebyFunding = (fundingReceived / Math.Round(tenure));
+            if (type == ResearcherType.Staff)
+            {
+                threeYearAverage = threeYearCount / 3;
+                fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
+                performancebyPublication = (publicationCount / Math.Round(tenure));
+                performancebyFunding = (fundingReceived / Math.Round(tenure));
+            } else
+            {
+                threeYearAverage = null;
+                fundingReceived = null;
+                performancebyPublication = null;
+                performancebyFunding = null;
+            }
 
         }
     }

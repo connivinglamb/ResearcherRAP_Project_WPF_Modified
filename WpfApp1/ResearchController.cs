@@ -147,7 +147,7 @@ namespace ResearcherRAP_Project
 
         public static ObservableCollection<PublicationBrief> loadPublications(int researcherID)
         {
-            return new ObservableCollection<PublicationBrief>();
+            return DBAdapter.publicationBriefQuery(researcherID);
         }
 
         public static void publicationsFilter(int yearMin, int yearMax)
