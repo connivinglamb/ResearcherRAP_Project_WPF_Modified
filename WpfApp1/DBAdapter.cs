@@ -103,27 +103,28 @@ namespace ResearcherRAP_Project
                 string email = dbReader.GetString(7);
                 string photo = dbReader.GetString(8);
                 string currentJobTitle = "Student";
-                switch (dbReader.GetString(11))
+                if (!dbReader.IsDBNull(11))
                 {
-                    case null:
-                        currentJobTitle = "Student";
-                        break;
-                    case "A":
-                        currentJobTitle = "Research Associate";
-                        break;
-                    case "B":
-                        currentJobTitle = "Lecturer";
-                        break;
-                    case "C":
-                        currentJobTitle = "Assistant Professor";
-                        break;
-                    case "D":
-                        currentJobTitle = "Associate Professor";
-                        break;
-                    case "E":
-                        currentJobTitle = "Professor";
-                        break;
+                    switch (dbReader.GetString(11))
+                    {
+                        case "A":
+                            currentJobTitle = "Research Associate";
+                            break;
+                        case "B":
+                            currentJobTitle = "Lecturer";
+                            break;
+                        case "C":
+                            currentJobTitle = "Assistant Professor";
+                            break;
+                        case "D":
+                            currentJobTitle = "Associate Professor";
+                            break;
+                        case "E":
+                            currentJobTitle = "Professor";
+                            break;
+                    }
                 }
+                
 
                 int ID = dbReader.GetInt32(0);
 
