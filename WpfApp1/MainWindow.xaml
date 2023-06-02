@@ -146,10 +146,25 @@
                 <Label Content="{Binding Path=photo}"/>
 
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Tenure:" />
+                <Label Content="{Binding Path=tenure, StringFormat={}{0:#,#,00}}" />
+                <Label Content="years" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Publications:" />
+                <Label Content="{Binding Path=publicationCount}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Three-year average:" />
+                <Label Content="{Binding Path=threeYearAverage}" />
+                <Label Content="Performance:" />
+                <TextBlock Text="{Binding Path=performance, StringFormat='\{0\}%'}" Margin="0,5,0,0" />
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="29,197,47,67" Grid.Row="1">
-            <Image Width="200" Height="200" Source="{Binding Path=photo}"/>
-        </StackPanel>   
+        <StackPanel Grid.Column="1" Margin="10,273,10,7" Grid.Row="1">
+            <Image Width="252" Height="205" Source="{Binding photo}"/>
+        </StackPanel>
         <StackPanel x:Name="PublicationListView" Margin="0,26,36,47" Grid.Column="2" Grid.RowSpan="2">
             <ListBox ItemsSource="{Binding hasPublications}" Height="196"
                      SelectionChanged="LoadPublicationDetails"

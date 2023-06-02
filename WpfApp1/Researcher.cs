@@ -93,6 +93,7 @@ namespace ResearcherRAP_Project
         public double? fundingReceived { get; set; } //staff only (Nullable)
         public double? performancebyPublication { get; set; } //staff only (Nullable)
         public double? performancebyFunding { get; set; } //staff only (Nullable)
+        public double? performance { get; set; }
 
 
         public DateTime commencedWithInstitution { get; set; }
@@ -126,7 +127,7 @@ namespace ResearcherRAP_Project
 
             this.commencedWithInstitution = commencedWithInstitution;
             this.commencedCurrentPosition = commencedCurrentPosition;
-            tenure = DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425;
+            tenure = Math.Round(DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425, 2);
 
             hasPublications = PublicationsController.loadPublications(researcherID);
             publicationCount = hasPublications.Count;
@@ -148,12 +149,33 @@ namespace ResearcherRAP_Project
             q1Percentage = rankingCount / publicationCount * 100;
             if (type == ResearcherType.Staff)
             {
-                threeYearAverage = threeYearCount / 3;
+                threeYearAverage = Math.Round(threeYearCount / 3, 1);
                 fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
                 performancebyPublication = (publicationCount / Math.Round(tenure));
                 performancebyFunding = (fundingReceived / Math.Round(tenure));
                 supervisions = SupervisionsController.loadSupervisions(researcherID);
                 supervisionsCount = supervisions.Count;
+
+                double expected = 1.5;
+                switch (level)
+                {
+                    case ResearcherLevel.A:
+                        expected = 1.5;
+                        break;
+                    case ResearcherLevel.B:
+                        expected = 3;
+                        break;
+                    case ResearcherLevel.C:
+                        expected = 6;
+                        break;
+                    case ResearcherLevel.D:
+                        expected = 9.6;
+                        break;
+                    case ResearcherLevel.E:
+                        expected = 12;
+                        break;
+                }
+                performance = Math.Round((double)threeYearAverage / expected * 100, 1);
 
             } else
             {

@@ -45,6 +45,11 @@ namespace ResearcherRAP_Project
                 PublicationListView.DataContext = ResearcherDetailsController.GetResearcherDetails();
                 //MessageBox.Show(GlobalVariables.GlobalResearcherID.ToString());
 
+                var photo = new Image();
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri (ResearcherDetailsController.GetResearcherDetails().photo);
             }
         }
 
@@ -117,17 +122,21 @@ namespace ResearcherRAP_Project
         private void ShowNames_Click(object sender, RoutedEventArgs e)
         {
             var researcher = ResearcherDetailsController.GetResearcherDetails();
-            if (researcher.supervisionsCount > 0)
+            if (researcher != null)
             {
-                string names = "";
-                foreach (var student in researcher.supervisions)
+                if (researcher.supervisionsCount > 0)
                 {
-                    names += student.name;
-                    names += "\n";
+                    string names = "";
+                    foreach (var student in researcher.supervisions)
+                    {
+                        names += student.name;
+                        names += "\n";
+                    }
+                    MessageBox.Show(names);
                 }
-                MessageBox.Show(names);
+
             }
-            
+
         }
     }
 }
