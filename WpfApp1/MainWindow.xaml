@@ -142,7 +142,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Tenure:" />
-                <!--<Label Content="{Binding Path=tenure, StringFormat={}{0:#,#,00}}" /> -->
+                <Label Content="{Binding Path=tenure}" />
                 <Label Content="years" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">

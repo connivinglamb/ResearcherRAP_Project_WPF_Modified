@@ -127,7 +127,7 @@ namespace ResearcherRAP_Project
 
             this.commencedWithInstitution = commencedWithInstitution;
             this.commencedCurrentPosition = commencedCurrentPosition;
-            tenure = DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425;
+            tenure = Math.Round(DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425, 2);
 
             hasPublications = PublicationsController.loadPublications(researcherID);
             publicationCount = hasPublications.Count;
