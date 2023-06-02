@@ -13,10 +13,11 @@ namespace ResearcherRAP_Project
     {
         private static string filePath1 = "C:\\Users\\James\\source\\repos\\ResearcherRAP_Project_WPF_Modified\\WpfApp1\\Fundings_Rankings.xml";
         private static string filePath2 = "C:\\Users\\glori\\Documents\\UTAS\\2023 Sem1\\KIT206\\Assignment 3\\ResearcherRAP_Project_WPF_Modified\\WpfApp1\\Fundings_Rankings.xml";
+        private static string filePath3 = "C:\\Users\\mallettj\\source\\repos\\ResearcherRAP_Project_WPF_Modified\\WpfApp1\\Fundings_Rankings.xml";
         public static int getFunding(int researcherID)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load(filePath2);
+            xml.Load(filePath3);
 
             int funding = 0;
             bool add;

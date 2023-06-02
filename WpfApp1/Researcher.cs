@@ -151,8 +151,8 @@ namespace ResearcherRAP_Project
             {
                 threeYearAverage = Math.Round(threeYearCount / 3, 1);
                 fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
-                performancebyPublication = (publicationCount / Math.Round(tenure));
-                performancebyFunding = (fundingReceived / Math.Round(tenure));
+                performancebyPublication = Math.Round(publicationCount / Math.Round(tenure), 2);
+                performancebyFunding = Math.Round((double)fundingReceived / Math.Round(tenure));
                 supervisions = SupervisionsController.loadSupervisions(researcherID);
                 supervisionsCount = supervisions.Count;
 

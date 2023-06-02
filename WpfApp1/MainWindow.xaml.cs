@@ -50,6 +50,9 @@ namespace ResearcherRAP_Project
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri (ResearcherDetailsController.GetResearcherDetails().photo);
+                bitmap.EndInit();
+                ImageSource imageSource = bitmap;
+                ResearcherPhoto.Source = imageSource;
             }
         }
 

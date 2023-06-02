@@ -143,8 +143,6 @@
                 <Label Content="Supervisions:" />
                 <Label Content="{Binding Path=supervisionsCount}" />
                 <Button x:Name="ShowNames" Click="ShowNames_Click">Show names</Button>
-                <Label Content="{Binding Path=photo}"/>
-
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Tenure:" />
@@ -161,9 +159,17 @@
                 <Label Content="Performance:" />
                 <TextBlock Text="{Binding Path=performance, StringFormat='\{0\}%'}" Margin="0,5,0,0" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Performance by Publications:" />
+                <Label Content="{Binding Path=performancebyPublication}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Performance by Funding:" />
+                <Label Content="{Binding Path=performancebyFunding}" />
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="10,273,10,7" Grid.Row="1">
-            <Image Width="252" Height="205" Source="{Binding photo}"/>
+        <StackPanel Grid.Column="1" Margin="10,329,10,0" Grid.Row="1" Height="151" VerticalAlignment="Top">
+            <Image x:Name="ResearcherPhoto" Width="252" Height="162"/>
         </StackPanel>
         <StackPanel x:Name="PublicationListView" Margin="0,26,36,47" Grid.Column="2" Grid.RowSpan="2">
             <ListBox ItemsSource="{Binding hasPublications}" Height="196"
