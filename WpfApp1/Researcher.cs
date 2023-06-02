@@ -93,6 +93,7 @@ namespace ResearcherRAP_Project
         public double? fundingReceived { get; set; } //staff only (Nullable)
         public double? performancebyPublication { get; set; } //staff only (Nullable)
         public double? performancebyFunding { get; set; } //staff only (Nullable)
+        public double? performance { get; set; }
 
 
         public DateTime commencedWithInstitution { get; set; }
@@ -155,12 +156,34 @@ namespace ResearcherRAP_Project
                 supervisions = SupervisionsController.loadSupervisions(researcherID);
                 supervisionsCount = supervisions.Count;
 
+                double expected = 1.5;
+                switch (level)
+                {
+                    case ResearcherLevel.A:
+                        expected = 1.5;
+                        break;
+                    case ResearcherLevel.B:
+                        expected = 3;
+                        break;
+                    case ResearcherLevel.C:
+                        expected = 6;
+                        break;
+                    case ResearcherLevel.D:
+                        expected = 9.6;
+                        break;
+                    case ResearcherLevel.E:
+                        expected = 12;
+                        break;
+                }
+                performance = Math.Round((double)threeYearAverage / expected * 100, 1);
+
             } else
             {
                 threeYearAverage = null;
                 fundingReceived = null;
                 performancebyPublication = null;
                 performancebyFunding = null;
+                performance = null;
             }
 
         }
