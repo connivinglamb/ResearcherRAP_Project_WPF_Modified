@@ -28,9 +28,9 @@
 
         <DataTemplate x:Key="PublicationListTemplate">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=publicationName}"/>
-                <TextBlock Text=", "/>
                 <TextBlock Text="{Binding Path=publicationYear}"/>
+                <TextBlock Text=", "/>
+                <TextBlock Text="{Binding Path=publicationName}"/>
             </StackPanel>
         </DataTemplate>
 

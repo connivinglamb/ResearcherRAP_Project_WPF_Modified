@@ -95,7 +95,7 @@ namespace ResearcherRAP_Project
 
     }
 
-    class ReportController
+ /*   class ReportController
     {
         public void reportClipboardRetrieve(ObservableCollection<ResearcherReport> reportCacheCurrent)
         {
@@ -113,6 +113,7 @@ namespace ResearcherRAP_Project
 
         }
     }
+ */
     class ResearcherDetailsController
     {
         public static ResearcherDetailed ResearcherDetailsCache { get; set; }
@@ -170,14 +171,6 @@ namespace ResearcherRAP_Project
         public static ObservableCollection<ResearcherSupervision> loadSupervisions(int researcherID)
         {
             return DBAdapter.supervisionsQuery(researcherID);
-        }
-    }
-
-    class ResearcherCumulativeCountController
-    {
-        public void loadResearcherCumulativeCount(int researcherID)
-        {
-            
         }
     }
 }

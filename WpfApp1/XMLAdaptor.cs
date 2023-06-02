@@ -17,7 +17,7 @@ namespace ResearcherRAP_Project
         public static int getFunding(int researcherID)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load(filePath2);
+            xml.Load(filePath3);
 
             int funding = 0;
             bool add;

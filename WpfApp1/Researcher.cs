@@ -190,6 +190,7 @@ namespace ResearcherRAP_Project
 
         }
     }
+    /*
     public class ResearcherDetailsBrief //used on interactiv history for staff researchers for positions held
     {
         public string staffResearcherPreviousPosition;
@@ -207,6 +208,7 @@ namespace ResearcherRAP_Project
             //To string function for researcherDetails brief in format : position, start - end
         }
     }
+    */
     public class PublicationBrief //formerly cumulative
     {
         public string publicationName { get; set; }
@@ -274,6 +276,7 @@ namespace ResearcherRAP_Project
         }
     }
     
+    /*
     public class ResearcherReport
     {
         public enum ReportGrade { poor, below_expectations, meeting_minimum, star_performer }
@@ -319,6 +322,7 @@ namespace ResearcherRAP_Project
             }
         }
     }
+    */
 
 }
 
