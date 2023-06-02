@@ -13,10 +13,6 @@
             ObjectInstance ="{StaticResource ResearcherBriefInstance}"
             MethodName="getResearcherBriefTemp">
         </ObjectDataProvider>
-        <ObjectDataProvider x:Key="ResearcherDetails"
-                            ObjectInstance="{StaticResource ResearcherDetailsInstance}"
-                            MethodName="GetResearcherDetails">
-        </ObjectDataProvider>
 
 
         <DataTemplate x:Key = "ResearcherListTemplate">

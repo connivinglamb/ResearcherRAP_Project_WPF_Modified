@@ -58,7 +58,7 @@ namespace ResearcherRAP_Project
 
         private void LoadPublicationDetails(object Sender, SelectionChangedEventArgs e)
         {
-            try
+            if (e.AddedItems.Count > 0)
             {
                 string pulledPublication = e.AddedItems[0].ToString();
                 int doiIndex = pulledPublication.IndexOf("@");
@@ -67,10 +67,6 @@ namespace ResearcherRAP_Project
                     pulledPublication = pulledPublication.Substring(doiIndex + 1);
                     PublicationDetailsView.DataContext = PublicationDetailsController.loadPublication(pulledPublication);
                 }
-            }
-            catch
-            {
-                Console.Write("Reeeeeeeeeeee");
             }
                 //MessageBox.Show(pulledPublication);
         }

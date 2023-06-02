@@ -159,6 +159,10 @@ namespace ResearcherRAP_Project
             publicationDetailsCache = DBAdapter.publicationDetailedQuery(publicationID);
             return publicationDetailsCache;
         }
+        public static PublicationDetailed getPublication()
+        {
+            return publicationDetailsCache;
+        }
     }
 
     static class SupervisionsController

@@ -177,6 +177,8 @@ namespace ResearcherRAP_Project
                 }
                 performance = Math.Round((double)threeYearAverage / expected * 100, 1);
 
+                threeYearAverage = Math.Round((double)threeYearAverage, 2);
+
             } else
             {
                 threeYearAverage = null;
@@ -222,7 +224,7 @@ namespace ResearcherRAP_Project
 
         public override string ToString()
         {
-            string outputString = string.Format("{0} {1} {2} {3}", this.publicationName, this.publicationYear, this.publicationRanking, this.publicationDOI);
+            string outputString = string.Format("{0} {1} {2} @{3}", this.publicationName, this.publicationYear, this.publicationRanking, this.publicationDOI);
             Console.Write(outputString);
             return outputString;
         }
