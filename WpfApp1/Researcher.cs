@@ -67,7 +67,27 @@ namespace ResearcherRAP_Project
         public string? degree { get; set; } //students only (Nullable)
         public int? supervisor { get; set; } //students only (Nullable)
 
-        public ObservableCollection<ResearcherDetailed>? supervisions { get; set; } //staff only (Nullable)
+        public string? supervisorName
+        {
+            get
+            {
+                if (supervisor == null)
+                    return null;
+                else
+                {
+                    string? name = null;
+                    foreach (var researcher in ResearcherBriefController.researcherDetailsBriefCache)
+                    {
+                        if (researcher.researcherID == supervisor)
+                            name = researcher.ToString();
+                    }
+                    return name;
+                }
+            }
+        }
+
+        public ObservableCollection<ResearcherSupervision>? supervisions { get; set; } //staff only (Nullable)
+        public int? supervisionsCount { get; set; } //staff only nullable extension of supervisions
         public double? threeYearAverage { get; set; } //staff only (Nullable)
         public double? fundingReceived { get; set; } //staff only (Nullable)
         public double? performancebyPublication { get; set; } //staff only (Nullable)
@@ -131,6 +151,9 @@ namespace ResearcherRAP_Project
                 fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
                 performancebyPublication = (publicationCount / Math.Round(tenure));
                 performancebyFunding = (fundingReceived / Math.Round(tenure));
+                supervisions = SupervisionsController.loadSupervisions(researcherID);
+                supervisionsCount = supervisions.Count;
+
             } else
             {
                 threeYearAverage = null;
@@ -215,12 +238,10 @@ namespace ResearcherRAP_Project
 
     public class ResearcherSupervision
     {
-        public int id;
         public string name;
 
-        public ResearcherSupervision(int id, string name)
+        public ResearcherSupervision(string name)
         {
-            this.id = id;
             this.name = name;
         }
     }

@@ -11,7 +11,7 @@ namespace ResearcherRAP_Project
 {
     public static class XMLAdaptor
     {
-        private static string filePath = "C:\\Users\\glori\\Documents\\UTAS\\2023 Sem1\\KIT206\\Assignment 3\\WpfApp1\\Fundings_Rankings.xml"; //Please edit for your system
+        private static string filePath = "C:\\Users\\James\\source\\repos\\ResearcherRAP_Project_WPF_Modified\\WpfApp1\\Fundings_Rankings.xml"; //Please edit for your system
         public static int getFunding(int researcherID)
         {
             XmlDocument xml = new XmlDocument();

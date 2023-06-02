@@ -101,5 +101,21 @@ namespace ResearcherRAP_Project
                 ResearcherBriefController.applyFilters(ResearcherBriefController.researcherDetailsBriefCache, ResearcherBriefController.filterRange, ResearcherBriefController.filterName);
             }
         }
+
+        private void ShowNames_Click(object sender, RoutedEventArgs e)
+        {
+            var researcher = ResearcherDetailsController.GetResearcherDetails();
+            if (researcher.supervisionsCount > 0)
+            {
+                string names = "";
+                foreach (var student in researcher.supervisions)
+                {
+                    names += student.name;
+                    names += "\n";
+                }
+                MessageBox.Show(names);
+            }
+            
+        }
     }
 }

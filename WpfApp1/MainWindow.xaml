@@ -66,11 +66,11 @@
             <ColumnDefinition Width="160*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="69*" />
+            <RowDefinition Height="361*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="EmploymentLevelComboBox" SelectionChanged="EmploymentLevelComboBox_SelectionChanged" Margin="5,10,5,130">
+        <ComboBox x:Name="EmploymentLevelComboBox" SelectionChanged="EmploymentLevelComboBox_SelectionChanged" HorizontalAlignment="Center" Width="202" Height="22" VerticalAlignment="Top">
             <ComboBoxItem>All</ComboBoxItem>
             <ComboBoxItem>Students Only</ComboBoxItem>
             <ComboBoxItem>Staff Only</ComboBoxItem>
@@ -82,11 +82,11 @@
         </ComboBox>
 
 
-        <ListBox Name="researcherList" Margin="0,5,0,10" SelectionChanged="LoadResearcherDetails"
+        <ListBox Name="researcherList" Margin="0,2,0,10" SelectionChanged="LoadResearcherDetails"
                  ItemsSource="{Binding Source={StaticResource ResearcherBriefList}}"
                  ItemTemplate="{StaticResource ResearcherListTemplate}" Grid.Row="1"/>
 
-        <TextBox Name="listFilter" Margin="0,57,0,86" TextChanged="listFilter_TextChanged" />
+        <TextBox Name="listFilter" TextChanged="listFilter_TextChanged" Margin="0,40,0,0" Height="26" VerticalAlignment="Top" RenderTransformOrigin="0.389,0.51" />
 
         <StackPanel x:Name="ResearcherDetailsView" Grid.Column="1" Margin="5,0,0,10" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal">
@@ -101,10 +101,10 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="School/Unit: "/>
-                <Label Content="{Binding Path=schoolorUnit}"/>
+                <Label Content="{Binding Path=schoolOrUnit}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Job Title: "/>
+                <Label Content="Current Job Title: "/>
                 <Label Content="{Binding Path=currentJobTitle}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -121,7 +121,20 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Supervisor: "/>
-                <Label Content="{Binding Path=supervisor}"/>
+                <Label Content="{Binding Path=supervisorName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Commenced with institution:" />
+                <Label Content="{Binding Path=commencedWithInstitution}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Commenced current position:" />
+                <Label Content="{Binding Path=commencedCurrentPosition}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Supervisions:" />
+                <Label Content="{Binding Path=supervisionsCount}" />
+                <Button x:Name="ShowNames" Click="ShowNames_Click">Show names</Button>
             </StackPanel>
         </StackPanel>
 

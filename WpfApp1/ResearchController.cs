@@ -160,11 +160,11 @@ namespace ResearcherRAP_Project
         }
     }
 
-    class SupervisionsController
+    static class SupervisionsController
     {
-        public void loadSupervisions(int researcherID)
+        public static ObservableCollection<ResearcherSupervision> loadSupervisions(int researcherID)
         {
-            
+            return DBAdapter.supervisionsQuery(researcherID);
         }
     }
 

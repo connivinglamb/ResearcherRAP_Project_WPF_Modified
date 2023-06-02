@@ -303,8 +303,35 @@ namespace ResearcherRAP_Project
         public static ObservableCollection<ResearcherSupervision> supervisionsQuery(int researcherID)
         {
             ObservableCollection<ResearcherSupervision> newSupervisionsArray = new ObservableCollection<ResearcherSupervision>();
+            MySqlDataReader dbReader = null;
+            try
+            {
+                GetConnection();
+                conn.Open();
+                Debug.WriteLine(conn);
+                MySqlCommand getResearcherSupervisions = new MySqlCommand("SELECT given_name, family_name FROM researcher WHERE supervisor_id = @newSupervisor", conn);
+                getResearcherSupervisions.Parameters.Add("@newSupervisor", MySqlDbType.Int32);
+                getResearcherSupervisions.Parameters["@newSupervisor"].Value = researcherID;
+                dbReader = getResearcherSupervisions.ExecuteReader();
 
+                while (dbReader.Read())
+                {
+                    string name = dbReader.GetString(0) + " " + dbReader.GetString(1);
+                    newSupervisionsArray.Add(new ResearcherSupervision(name));
+                }
+            }
+            catch
+            {
+                Debug.WriteLine("Exception Thrown!");
+            }
+
+            finally
+            {
+                if (dbReader != null) { dbReader.Close(); }
+                if (conn != null) { conn.Close(); }
+            }
             return newSupervisionsArray;
+
         }
         
     }
