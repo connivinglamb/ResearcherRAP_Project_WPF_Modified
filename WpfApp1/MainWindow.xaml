@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResearcherRAP_Project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Window.Resources>
         <local:ResearcherBriefController x:Key="ResearcherBriefInstance"/>
         <local:ResearcherDetailsController x:Key="ResearcherDetailsInstance" />
@@ -27,6 +27,14 @@
                 <TextBlock Text=" ("/>
                 <TextBlock Text="{Binding Path=title}" />
                 <TextBlock Text=")"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PublicationListTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=publicationName}"/>
+                <TextBlock Text=", "/>
+                <TextBlock Text="{Binding Path=publicationYear}"/>
             </StackPanel>
         </DataTemplate>
 
@@ -135,11 +143,40 @@
                 <Label Content="Supervisions:" />
                 <Label Content="{Binding Path=supervisionsCount}" />
                 <Button x:Name="ShowNames" Click="ShowNames_Click">Show names</Button>
+                <Label Content="{Binding Path=photo}"/>
+
             </StackPanel>
         </StackPanel>
-
+        <StackPanel Grid.Column="1" Margin="29,197,47,67" Grid.Row="1">
+            <Image Width="200" Height="200" Source="{Binding Path=photo}"/>
+        </StackPanel>   
         <StackPanel x:Name="PublicationListView" Margin="0,26,36,47" Grid.Column="2" Grid.RowSpan="2">
-            <ListBox ItemsSource="{Binding hasPublications}" Height="249"/>
+            <ListBox ItemsSource="{Binding hasPublications}" Height="196"
+                     SelectionChanged="LoadPublicationDetails"
+                     ItemTemplate="{StaticResource PublicationListTemplate}"/>
+        </StackPanel>
+        <StackPanel x:Name="PublicationDetailsView" Grid.Column="2" Margin="5,149,37,7" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Title: "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Authors: "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Publication Year: "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Availability Date: "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Publication Type: "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Publication ranking: "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Cite As: "/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

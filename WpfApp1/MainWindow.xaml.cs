@@ -48,6 +48,12 @@ namespace ResearcherRAP_Project
             }
         }
 
+        private void LoadPublicationDetails(object Sender, SelectionChangedEventArgs e)
+        {
+            string pulledPublication = e.AddedItems[0].ToString();
+            MessageBox.Show(pulledPublication);
+        }
+
         private void listFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             ResearcherBriefController.filterName = listFilter.Text;

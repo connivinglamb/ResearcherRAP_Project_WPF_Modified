@@ -41,6 +41,7 @@ namespace ResearcherRAP_Project
         public override string ToString()
         {
             string outputString = string.Format("{0} {1} ({2}) {3}", this.nameGiven, this.nameFamily, this.title, this.researcherID);
+            Console.Write(outputString);
             return outputString;
         }
     }
@@ -183,10 +184,10 @@ namespace ResearcherRAP_Project
     }
     public class PublicationBrief //formerly cumulative
     {
-        public string publicationName;
-        public int publicationYear;
-        public string publicationDOI;
-        public string publicationRanking;
+        public string publicationName { get; set; }
+        public int publicationYear { get; set; }
+        public string publicationDOI { get; set; }
+        public string publicationRanking { get; set; }
 
         public PublicationBrief(string name, int year, string doi, string ranking)
         {
@@ -198,7 +199,9 @@ namespace ResearcherRAP_Project
 
         public override string ToString()
         {
-            return publicationName + publicationYear + publicationDOI + publicationRanking;
+            string outputString = string.Format("{0} {1} {2} {3}", this.publicationName, this.publicationYear, this.publicationRanking, this.publicationDOI);
+            Console.Write(outputString);
+            return outputString;
         }
     }
     public class PublicationDetailed
