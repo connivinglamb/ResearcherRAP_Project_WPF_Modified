@@ -247,7 +247,6 @@ namespace ResearcherRAP_Project
                 if (dbReader != null) { dbReader.Close(); }
                 if (conn != null) { conn.Close(); }
             }
-
             return newPublicationBriefArray;
         }
 

@@ -93,7 +93,6 @@ namespace ResearcherRAP_Project
         public double? fundingReceived { get; set; } //staff only (Nullable)
         public double? performancebyPublication { get; set; } //staff only (Nullable)
         public double? performancebyFunding { get; set; } //staff only (Nullable)
-        public double? performance { get; set; }
 
 
         public DateTime commencedWithInstitution { get; set; }
@@ -127,7 +126,7 @@ namespace ResearcherRAP_Project
 
             this.commencedWithInstitution = commencedWithInstitution;
             this.commencedCurrentPosition = commencedCurrentPosition;
-            tenure = Math.Round(DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425, 2);
+            tenure = DateTime.Now.Subtract(commencedWithInstitution).TotalDays/365.2425;
 
             hasPublications = PublicationsController.loadPublications(researcherID);
             publicationCount = hasPublications.Count;
@@ -149,33 +148,12 @@ namespace ResearcherRAP_Project
             q1Percentage = rankingCount / publicationCount * 100;
             if (type == ResearcherType.Staff)
             {
-                threeYearAverage = Math.Round(threeYearCount / 3, 1);
+                threeYearAverage = threeYearCount / 3;
                 fundingReceived = (double)XMLAdaptor.getFunding(researcherID);
                 performancebyPublication = Math.Round(publicationCount / Math.Round(tenure), 2);
                 performancebyFunding = Math.Round((double)fundingReceived / Math.Round(tenure));
                 supervisions = SupervisionsController.loadSupervisions(researcherID);
                 supervisionsCount = supervisions.Count;
-
-                double expected = 1.5;
-                switch (level)
-                {
-                    case ResearcherLevel.A:
-                        expected = 1.5;
-                        break;
-                    case ResearcherLevel.B:
-                        expected = 3;
-                        break;
-                    case ResearcherLevel.C:
-                        expected = 6;
-                        break;
-                    case ResearcherLevel.D:
-                        expected = 9.6;
-                        break;
-                    case ResearcherLevel.E:
-                        expected = 12;
-                        break;
-                }
-                performance = Math.Round((double)threeYearAverage / expected * 100, 1);
 
             } else
             {
@@ -221,26 +199,26 @@ namespace ResearcherRAP_Project
 
         public override string ToString()
         {
-            string outputString = string.Format("{0} {1} {2} @{3}", this.publicationName, this.publicationYear, this.publicationRanking, this.publicationDOI);
+            string outputString = string.Format("{0} {1} {2} {3}", this.publicationName, this.publicationYear, this.publicationRanking, this.publicationDOI);
             Console.Write(outputString);
             return outputString;
         }
     }
     public class PublicationDetailed
     {
-        public enum PublicationType { Conference, Journal, Other };
+        public enum PublicationType { Conference, Journal, Other }
         public enum PublicationRanking { Q1,  Q2, Q3, Q4 };
 
-        public PublicationType type;
-        public PublicationRanking ranking;
-        public string doi;
-        public string title;
-        public string authors;
-        public string citeAs;
-        public int age;
+        public PublicationType type { get; set; }
+        public PublicationRanking ranking { get; set; }
+        public string doi { get; set; }
+        public string title { get; set; }
+        public string authors { get; set; }
+        public string citeAs { get; set; }
+        public int age { get; set; }
 
-        public int year;
-        public DateTime availabilityDate;
+        public int year { get; set; }
+        public DateTime availabilityDate { get; set; }
 
         public int Age()
         {

@@ -156,6 +156,7 @@ namespace ResearcherRAP_Project
 
         public static PublicationDetailed loadPublication(string publicationID)
         {
+            publicationDetailsCache = DBAdapter.publicationDetailedQuery(publicationID);
             return publicationDetailsCache;
         }
     }
