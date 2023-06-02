@@ -51,7 +51,13 @@ namespace ResearcherRAP_Project
         private void LoadPublicationDetails(object Sender, SelectionChangedEventArgs e)
         {
             string pulledPublication = e.AddedItems[0].ToString();
-            MessageBox.Show(pulledPublication);
+            int doiIndex = pulledPublication.IndexOf("@");
+            if (doiIndex >= 0)
+            {
+                pulledPublication = pulledPublication.Substring(doiIndex + 1);
+                PublicationDetailsView.DataContext = PublicationDetailsController.loadPublication(pulledPublication);
+            }
+            //MessageBox.Show(pulledPublication);
         }
 
         private void listFilter_TextChanged(object sender, TextChangedEventArgs e)

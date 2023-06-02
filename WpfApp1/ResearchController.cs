@@ -152,11 +152,11 @@ namespace ResearcherRAP_Project
 
     class PublicationDetailsController
     {
-        public ObservableCollection<PublicationDetailed> loadPublication(int researcherID, int publicationID)
+        public static PublicationDetailed publicationDetailsCache { get; set; }
+
+        public static PublicationDetailed loadPublication(string publicationID)
         {
-            ObservableCollection<PublicationDetailed> newPublicationDetailed = new ObservableCollection<PublicationDetailed>();
-            //newPublicationDetailed.Add( DBAdapter.publicationBriefQeuery(publicationID));
-            return newPublicationDetailed;
+            return publicationDetailsCache;
         }
     }
 

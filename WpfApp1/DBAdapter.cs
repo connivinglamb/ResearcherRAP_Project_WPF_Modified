@@ -251,9 +251,9 @@ namespace ResearcherRAP_Project
             return newPublicationBriefArray;
         }
 
-        public static ObservableCollection<PublicationDetailed> publicationDetailedQuery(string publicationDOI)
+        public static PublicationDetailed publicationDetailedQuery(string publicationDOI)
         {
-            ObservableCollection<PublicationDetailed> newPublicationDetailsArray = new ObservableCollection<PublicationDetailed>();
+            PublicationDetailed newPublicationDetails = null;
             MySqlDataReader dbReader = null;
 
             try
@@ -281,7 +281,7 @@ namespace ResearcherRAP_Project
                     string detailsCite = dbReader.GetString(6);
                     DateTime detailsAvailable = dbReader.GetDateTime(7);
 
-                    newPublicationDetailsArray.Add(new PublicationDetailed(detailsType, detailsRanking, detailsDOI, detailsTitle, detailsAuthors, detailsCite, detailsYear, detailsAvailable));
+                    newPublicationDetails = (new PublicationDetailed(detailsType, detailsRanking, detailsDOI, detailsTitle, detailsAuthors, detailsCite, detailsYear, detailsAvailable));
                 }
             }
 
@@ -297,7 +297,7 @@ namespace ResearcherRAP_Project
             }
 
 
-            return newPublicationDetailsArray;
+            return newPublicationDetails;
         }
 
         public static ObservableCollection<ResearcherSupervision> supervisionsQuery(int researcherID)
